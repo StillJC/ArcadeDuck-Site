@@ -2,17 +2,238 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<SiteLayout title="Development | ArcadeDuck">
+<SiteLayout
+  title="Development Roadmap | ArcadeDuck"
+  description="ArcadeDuck development roadmap, release milestones, supported hardware expansion, stabilization periods, and future PlayStation-derived arcade systems."
+>
   <section class="page-hero">
-    <p class="eyebrow">Project Status</p>
-    <h1>Development</h1>
+    <p class="eyebrow">Development Roadmap</p>
+
+    <h1>Where ArcadeDuck goes next</h1>
+
     <p class="page-description">
-      Current ArcadeDuck milestones, completed work, and future hardware targets.
+      ArcadeDuck development is milestone-driven rather than tied to a rigid
+      release calendar. New hardware families are implemented in stages, with
+      dedicated time between major milestones for bug reports, fixes, testing,
+      and community feedback.
     </p>
   </section>
 
-  <section class="placeholder-panel">
-    <h2>Roadmap coming soon</h2>
-    <p>This page will track development by milestone rather than fixed deadlines.</p>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Current Milestone</p>
+        <h2>September 19, 2026 — First official release</h2>
+      </div>
+
+
+    </div>
+
+    <div class="systems-list">
+      <article class="hardware-card supported-hardware">
+        <div class="hardware-card-header">
+          <div>
+            <span class="hardware-manufacturer">ArcadeDuck 0.5.x</span>
+            <h3>Initial public release</h3>
+          </div>
+
+          <span class="status-badge supported">9/19/2026</span>
+        </div>
+
+        <p>
+          The first official ArcadeDuck release establishes the initial
+          supported hardware baseline and moves the project from private
+          development into public testing.
+        </p>
+
+        <div class="hardware-tags">
+          <span>Konami GV</span>
+          <span>Konami GQ</span>
+          <span>Namco System 11</span>
+          <span>Sony ZN-1 Families</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Release Cadence</p>
+        <h2>Build. Stabilize. Repeat.</h2>
+      </div>
+
+      <p>
+        Each major hardware implementation is followed by a stabilization
+        period before development moves on to the next platform.
+      </p>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 1</span>
+        <h3>Implement hardware</h3>
+
+        <p>
+          Bring the next arcade platform into ArcadeDuck with enough hardware,
+          controls, audio, media, protection, and peripheral support to make
+          meaningful testing possible.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 2</span>
+        <h3>Release and test</h3>
+
+        <p>
+          Put the implementation in front of real users, real cabinets, and
+          whatever hardware combinations they manage to throw at it.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 3</span>
+        <h3>Stabilize</h3>
+
+        <p>
+          Spend roughly two weeks working through bug reports, regressions,
+          control issues, compatibility problems, and useful suggestions.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 4</span>
+        <h3>Move forward</h3>
+
+        <p>
+          Once the current milestone is stable enough, development shifts to
+          the next PlayStation-derived arcade hardware family.
+        </p>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Tentative Roadmap</p>
+        <h2>Major hardware milestones</h2>
+      </div>
+
+      <p>
+        Everything after the initial release is intentionally flexible.
+        Hardware research, reverse engineering, regressions, and community
+        feedback can all change the order or timing.
+      </p>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Milestone 01</span>
+        <h3>Initial Release</h3>
+
+        <p>
+          Konami GV, Konami GQ, Namco System 11, and all currently implemented
+          Sony ZN-1-based arcade hardware.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Recovery Period</span>
+        <h3>Two weeks away from major implementation work</h3>
+
+        <p>
+          A short break after the initial release so my brain can cool off
+          after staring at emulator code for six-plus hours a day and
+          pretending that qualifies as a normal hobby.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Stabilization</span>
+        <h3>Initial release fixes</h3>
+
+        <p>
+          Roughly two weeks dedicated to bug reports, compatibility problems,
+          control issues, suggestions, and whatever entirely new ways people
+          discover to break ArcadeDuck.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Milestone 02</span>
+        <h3>Capcom ZN-2</h3>
+
+        <p>
+          Implement the second-generation Capcom ZN hardware family, followed
+          by another stabilization and community-testing period.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Milestone 03</span>
+        <h3>Taito G-Net</h3>
+
+        <p>
+          Bring Taito G-Net into the main ArcadeDuck hardware lineup, including
+          its removable media, protection, and platform-specific behavior,
+          followed by another bug-fix cycle.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Milestone 04</span>
+        <h3>Namco System 12</h3>
+
+        <p>
+          Continue the Namco hardware path with System 12, followed by another
+          dedicated stabilization period before moving to the next platform.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Future Milestones</span>
+        <h3>System 10, System 573, Twinkle, and beyond</h3>
+
+        <p>
+          Continue working through the remaining PlayStation-derived arcade
+          hardware families as research, implementation quality, and available
+          brain cells permit.
+        </p>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">Roadmap Policy</p>
+      <h2>The order matters more than the dates.</h2>
+    </div>
+
+    <p>
+      September 19 is the first public release target. Everything after that is
+      intentionally tentative. Arcade hardware has a habit of turning one
+      apparently simple subsystem into three weeks of reverse engineering, so
+      ArcadeDuck will move forward when the current milestone is stable enough
+      rather than chasing arbitrary deadlines.
+    </p>
+  </section>
+
+
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">The Long-Term Plan</p>
+      <h2>Keep going until there is nothing left to implement.</h2>
+    </div>
+
+    <p>
+      Implement hardware, release it, fix what breaks, then move on to the next
+      platform. Repeat until I either run out of PlayStation-based arcade
+      hardware or remaining brain cells.
+    </p>
   </section>
 </SiteLayout>
