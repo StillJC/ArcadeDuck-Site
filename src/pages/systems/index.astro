@@ -1,0 +1,204 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<SiteLayout
+  title="Systems | ArcadeDuck"
+  description="Arcade hardware supported, under development, and planned for ArcadeDuck."
+>
+  <section class="page-hero systems-hero">
+    <p class="eyebrow">Hardware Roadmap</p>
+
+    <h1>Arcade systems</h1>
+
+    <p class="page-description">
+      ArcadeDuck is focused on PlayStation-derived and related arcade hardware.
+      This page tracks systems that are supported, currently being developed,
+      and planned for future implementation.
+    </p>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Current Support</p>
+        <h2>Supported</h2>
+      </div>
+
+      <p>
+        Hardware with established ArcadeDuck support and playable game coverage.
+      </p>
+    </div>
+
+    <div class="systems-list">
+      <article class="hardware-card supported-hardware">
+        <div class="hardware-card-header">
+          <div>
+            <span class="hardware-manufacturer">Konami</span>
+            <h3>Konami GV</h3>
+          </div>
+
+          <span class="status-badge supported">Supported</span>
+        </div>
+
+        <p>
+          PlayStation-derived arcade platform using CD-ROM media with
+          board-specific controls and daughterboard hardware.
+        </p>
+
+        <div class="hardware-tags">
+          <span>CD-ROM</span>
+          <span>SCSI</span>
+          <span>Trackball</span>
+          <span>Lightgun</span>
+          <span>Specialized Controls</span>
+        </div>
+      </article>
+
+      <article class="hardware-card supported-hardware">
+        <div class="hardware-card-header">
+          <div>
+            <span class="hardware-manufacturer">Konami</span>
+            <h3>Konami GQ</h3>
+          </div>
+
+          <span class="status-badge supported">Supported</span>
+        </div>
+
+        <p>
+          PlayStation-derived Konami hardware using SCSI hard-disk storage,
+          expanded system memory, and dedicated Konami sound hardware.
+        </p>
+
+        <div class="hardware-tags">
+          <span>HDD</span>
+          <span>SCSI</span>
+          <span>Lightgun</span>
+          <span>Expanded RAM</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Active Work</p>
+        <h2>In development</h2>
+      </div>
+
+      <p>
+        Hardware currently receiving implementation, migration, or validation work.
+      </p>
+    </div>
+
+    <div class="systems-list">
+
+      <article class="hardware-card development-hardware">
+        <div class="hardware-card-header">
+          <div>
+            <span class="hardware-manufacturer">Namco</span>
+            <h3>System 11</h3>
+          </div>
+
+          <span class="status-badge development">In Development</span>
+        </div>
+
+        <p>
+          Namco's first major PlayStation-derived arcade platform and an
+          active ArcadeDuck hardware implementation target.
+        </p>
+
+        <div class="hardware-tags">
+          <span>ROM</span>
+          <span>PlayStation-derived</span>
+          <span>Namco</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="systems-status-section planned-systems-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Future Hardware</p>
+        <h2>Planned systems</h2>
+      </div>
+
+      <p>
+        Accepted long-term ArcadeDuck targets. Order does not represent
+        implementation priority.
+      </p>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Namco</span>
+        <h3>System 12</h3>
+        <p>
+          Successor to System 11 with expanded PlayStation-derived arcade hardware.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Namco</span>
+        <h3>System 10</h3>
+        <p>
+          Later Namco PlayStation-derived hardware with additional storage
+          and protection requirements.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Konami</span>
+        <h3>System 573</h3>
+        <p>
+          Konami PlayStation-derived arcade hardware used across a wide range
+          of cabinet and peripheral configurations.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Konami</span>
+        <h3>Twinkle</h3>
+        <p>
+          Specialized Konami arcade platform retained as its own hardware family.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Taito</span>
+        <h3>G-Net</h3>
+        <p>
+          Taito arcade hardware based around PlayStation technology and
+          removable game media.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Multiple Manufacturers</span>
+        <h3>Sony ZN-derived families</h3>
+        <p>
+          Manufacturer-specific ZN and PlayStation-derived arcade boards will
+          remain distinct hardware families rather than one generic ZN platform.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">Roadmap Policy</p>
+      <h2>Hardware support is milestone-driven.</h2>
+    </div>
+
+    <p>
+      Planned systems are added as ArcadeDuck reaches stable milestones on
+      existing hardware. A planned listing indicates accepted project scope,
+      not a promised release date.
+    </p>
+  </section>
+</SiteLayout>
+

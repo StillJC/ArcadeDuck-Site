@@ -1,0 +1,747 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="About | ArcadeDuck"
+  description="The story behind ArcadeDuck: The Simpsons Bowling, DuckStation, Konami GV, the final GPL-era DuckStation baseline, and the projects and people whose work made ArcadeDuck possible."
+>
+  <section class="page-hero about-hero">
+    <p class="eyebrow">About ArcadeDuck</p>
+    <h1>This was supposed to fix a bowling game.</h1>
+    <p class="page-description">
+      ArcadeDuck is an arcade-focused emulator for PlayStation-derived arcade
+      hardware. That was not the original plan. The original plan was
+      considerably more reasonable: get <em>The Simpsons Bowling</em> working
+      properly on a Windows PC.
+    </p>
+  </section>
+
+  <article class="about-page">
+    <section class="about-opening">
+      <p>
+        Somewhere between that goal and the present day, the project acquired
+        SCSI controllers, flash memory, EEPROMs, trackballs, lightguns, arcade
+        I/O, board-specific BIOS handling, an arcade-only game database,
+        specialized controller profiles, multiple hardware families, and a
+        frontend that increasingly wants nothing to do with pretending these
+        machines are ordinary PlayStations.
+      </p>
+      <p class="about-punchline">So that went well.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">The original problem</p>
+      <h2>Why <em>The Simpsons Bowling</em>?</h2>
+
+      <p>
+        <em>The Simpsons Bowling</em> has been playable in MAME for years, but
+        one of its most noticeable problems has been its audio—particularly
+        the streamed character and announcer voices.
+      </p>
+
+      <p>
+        And in this particular game, that matters a lot. The cabinet used the
+        actual Simpsons voice cast, with characters reacting to throws, talking
+        between turns, insulting each other, and generally providing most of
+        the personality of the game. The announcer calls strikes, doubles,
+        turkeys, and other events throughout play.
+      </p>
+
+      <p>
+        MAME Testers documents the long-standing issue directly: after the
+        first voice/sample is loaded from the CD, later streamed dialogue can
+        fail to load. The result is missing character speech and missing calls
+        such as “Strike,” “Double,” and “Turkey,” with some screens lingering
+        longer while the game waits on audio that never plays.
+      </p>
+
+      <div class="about-links">
+        <a
+          href="https://mametesters.org/view.php?id=8017"
+          target="_blank"
+          rel="noreferrer"
+        >MAME Testers issue 08017 ↗</a>
+        <a
+          href="https://adb.arcadeitalia.net/dettaglio_mame.php?game_name=simpbowl&lang=en"
+          target="_blank"
+          rel="noreferrer"
+        >The Simpsons Bowling hardware/game information ↗</a>
+      </div>
+
+      <div class="about-callout">
+        <p>
+          When the voices disappear, the bowling still works. Technically.
+          But removing most of the dialogue from <em>The Simpsons Bowling</em>
+          is a little like watching an episode of <em>The Simpsons</em> with
+          half the cast muted. You can probably figure out what is happening,
+          but something has clearly gone wrong.
+        </p>
+      </div>
+
+      <p>
+        Then there was the Arcade1Up version. Arcade1Up's Simpsons cabinet used
+        a modified version of <strong>DuckStation</strong> for
+        <em>The Simpsons Bowling</em>. That implementation demonstrated a
+        practical route to running the game with its specialized arcade
+        hardware and, importantly, without accepting the missing-dialogue
+        experience as normal.
+      </p>
+
+      <p class="about-question">
+        Can we get that working properly on a normal Windows PC?
+      </p>
+
+      <p>That was the beginning of ArcadeDuck. We just didn't know it yet.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Milestone one</p>
+      <h2>First, make Homer talk.</h2>
+
+      <p>
+        The initial goal was not to create another PlayStation emulator.
+        DuckStation already existed, and creating a new PS1 emulator from
+        scratch because Homer Simpson refused to announce a turkey would have
+        been excessive even by our standards.
+      </p>
+
+      <p>
+        Instead, the goal was to understand the arcade-specific work that had
+        already been done around <em>The Simpsons Bowling</em> and make it
+        practical on Windows.
+      </p>
+
+      <p>
+        The game runs on <strong>Konami GV</strong>, a PlayStation-derived
+        arcade platform, but its cabinet includes hardware that an ordinary
+        consumer PlayStation emulator has absolutely no reason to care about:
+        SCSI storage, EEPROM, flash memory, trackball hardware, cabinet inputs,
+        arcade-specific boot behavior, and a dedicated daughterboard.
+      </p>
+
+      <p>
+        In other words, everything required to turn “it's basically a
+        PlayStation” into “why the hell isn't this register responding?”
+      </p>
+
+      <p>
+        The first real milestone was getting all of that working reliably while
+        preserving the thing that started the whole project:
+        <strong>the voices worked.</strong>
+      </p>
+
+      <p class="about-punchline">Mission accomplished. Project over. Obviously.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Scope control</p>
+      <h2>Then we noticed there were other games.</h2>
+
+      <p>
+        Once <em>The Simpsons Bowling</em> was working, something inconvenient
+        became apparent: we had not merely fixed one game. We had implemented
+        a substantial amount of <strong>Konami GV</strong>.
+      </p>
+
+      <p class="about-question">What about the rest of the GV library?</p>
+
+      <p>
+        That meant standard joystick games, trackball games, two-player
+        trackball games, independent lightguns, specialized control hardware,
+        EEPROM and flash persistence, game-specific hardware configurations,
+        more accurate SCSI behavior, operator controls, Test and Service modes,
+        and all the other things that make an arcade machine an arcade machine
+        instead of a PlayStation wearing a very expensive wooden costume.
+      </p>
+
+      <p>
+        Eventually, supporting the entire Konami GV family became the goal.
+        Then GV worked. That would have been an excellent place to stop.
+      </p>
+
+      <p>
+        Instead, <strong>Crypt Killer</strong> happened. Crypt Killer runs on
+        <strong>Konami GQ</strong>, another PlayStation-derived Konami arcade
+        platform with expanded memory, SCSI hard-disk storage, dedicated sound
+        hardware, and three-player lightgun support.
+      </p>
+
+      <p>Because apparently two guns were insufficient.</p>
+
+      <p>
+        So GQ followed GV. Then attention turned to
+        <strong>Namco System 11</strong>. At some point it became difficult to
+        continue describing ArcadeDuck as “that Simpsons Bowling thing.”
+      </p>
+
+      <p class="about-punchline">We remain disappointed by this failure of scope control.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Source provenance</p>
+      <h2>Where ArcadeDuck came from.</h2>
+
+      <p>
+        ArcadeDuck was not written from scratch. That matters, and we have no
+        interest in pretending otherwise.
+      </p>
+
+      <div class="lineage" aria-label="ArcadeDuck source lineage">
+        <a class="lineage-step" href="https://github.com/stenzek/duckstation" target="_blank" rel="noreferrer">
+          <span class="lineage-label">Foundation</span>
+          <strong>DuckStation</strong>
+          <span>Connor McLaughlin (stenzek) and contributors</span>
+        </a>
+        <span class="lineage-arrow" aria-hidden="true">↓</span>
+        <a class="lineage-step" href="https://github.com/Arcade1Up/duckstation-sb" target="_blank" rel="noreferrer">
+          <span class="lineage-label">Arcade port</span>
+          <strong>Arcade1Up / duckstation-sb</strong>
+          <span>Simpsons Bowling Android arcade implementation</span>
+        </a>
+        <span class="lineage-arrow" aria-hidden="true">↓</span>
+        <a class="lineage-step" href="https://github.com/t-dollaz/simpsons-bowling-baby-phoenix-duckstation" target="_blank" rel="noreferrer">
+          <span class="lineage-label">Desktop continuation</span>
+          <strong>t-dollaz</strong>
+          <span>simpsons-bowling-baby-phoenix-duckstation</span>
+        </a>
+        <span class="lineage-arrow" aria-hidden="true">↓</span>
+        <div class="lineage-step lineage-current">
+          <span class="lineage-label">Current project</span>
+          <strong>ArcadeDuck</strong>
+          <span>GV → GQ → System 11 → “This still seems manageable.”</span>
+        </div>
+      </div>
+
+      <p>
+        At the foundation is <strong>DuckStation</strong>, created by Connor
+        McLaughlin (<code>stenzek</code>) and developed with contributions from
+        many other people. DuckStation provided the enormous amount of
+        PlayStation emulation work underneath ArcadeDuck: CPU emulation,
+        recompilers, GPU and SPU emulation, timing, rendering backends, input
+        infrastructure, frontend architecture, and countless other pieces we
+        did not have to reinvent.
+      </p>
+
+      <p>
+        ArcadeDuck's contribution is not “we invented PlayStation emulation.”
+        That would be impressive. It would also be bullshit.
+      </p>
+
+      <p>
+        Arcade1Up later created its modified <code>duckstation-sb</code>
+        implementation specifically for <em>The Simpsons Bowling</em> on its
+        Android-based arcade cabinet. Its published source identifies the
+        special Simpsons Bowling media and flash requirements and credits
+        <strong>Datapower Development</strong> for additional code.
+      </p>
+
+      <p>
+        <strong>t-dollaz</strong> subsequently continued that work in
+        <code>simpsons-bowling-baby-phoenix-duckstation</code>, adapting and
+        extending the Arcade1Up-derived implementation for desktop use. That
+        repository became the immediate starting point from which ArcadeDuck
+        grew.
+      </p>
+
+      <p>
+        ArcadeDuck has since migrated, replaced, refactored, or rewritten
+        substantial parts of that code as the project expanded beyond one game
+        and one hardware configuration. None of that changes where it came
+        from. Good open-source projects should make their lineage clear.
+        Pretending you appeared fully formed from the void is generally frowned
+        upon.
+      </p>
+    </section>
+
+    <section class="about-section about-split">
+      <div>
+        <p class="eyebrow">Terminology department</p>
+        <h2>And no, Baby Phoenix isn't another developer.</h2>
+      </div>
+      <div>
+        <p>
+          The repository naming makes one part of this history unnecessarily
+          confusing. <strong>Baby Phoenix is not a person.</strong>
+        </p>
+        <p>
+          Baby Phoenix is the codename associated with the Konami GV hardware
+          used for <em>The Simpsons Bowling</em>. So when you see
+          <code>simpsons-bowling-baby-phoenix-duckstation</code>, the developer
+          is <strong>t-dollaz</strong>. Baby Phoenix is the hardware.
+        </p>
+        <p>
+          There is not another mysterious programmer named Baby Phoenix
+          somewhere in this story waiting for their credit. Emulator family
+          trees are confusing enough already.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Modernizing the foundation</p>
+      <h2>Then we had to deal with the DuckStation underneath it.</h2>
+
+      <p>
+        The Simpsons Bowling code we inherited was valuable. The DuckStation
+        underneath it was also old.
+      </p>
+
+      <p>
+        The Arcade1Up/t-dollaz lineage was based around a DuckStation tree from
+        approximately the <strong>2021 Qt 5 era</strong>. t-dollaz's own
+        repository describes it as a years-old snapshot that had diverged from
+        modern DuckStation architecture.
+      </p>
+
+      <p>
+        That left ArcadeDuck with an awkward combination: a working
+        implementation of obscure arcade hardware sitting on top of a
+        PlayStation emulator foundation that was several years behind the
+        project it originally came from.
+      </p>
+
+      <p>
+        Keeping that old base would have been easier in the short term. It also
+        would have meant deliberately building a new emulator project on
+        years-old infrastructure when a much newer compatible foundation was
+        available.
+      </p>
+
+      <p>
+        So ArcadeDuck undertook a much larger migration: preserve and understand
+        the working arcade hardware implementation while moving everything onto
+        the <strong>last upstream DuckStation revision immediately before its
+        source licensing changed away from the prior GPL-compatible tree</strong>.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Why this revision?</p>
+      <h2>Why the last GPL-era DuckStation baseline?</h2>
+
+      <p>
+        This is another question ArcadeDuck will probably get forever:
+        <strong>Why are you using an older version of DuckStation instead of
+        the latest one?</strong>
+      </p>
+
+      <p>Because the version number is not the important part. The licensing boundary is.</p>
+
+      <div class="about-code-card">
+        <span>ArcadeDuck upstream baseline</span>
+        <code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code>
+        <strong>GPU/SW: Split out rasterizer, add dynamic selection</strong>
+      </div>
+
+      <p>
+        DuckStation commit <code>25bc8a6</code> is the direct parent of commit
+        <code>9ca6b54</code>, where the project changed source-file SPDX headers
+        from the previous <code>(GPL-3.0 OR CC-BY-NC-ND-4.0)</code> licensing to
+        <code>PolyForm-Strict-1.0.0</code> and updated the project license text.
+      </p>
+
+      <div class="about-links">
+        <a
+          href="https://github.com/stenzek/duckstation/commit/25bc8a64803df7e702db66e0f11d7b7d0fdc99f2"
+          target="_blank"
+          rel="noreferrer"
+        >ArcadeDuck's DuckStation baseline ↗</a>
+        <a
+          href="https://github.com/stenzek/duckstation/commit/9ca6b5430fb358b39f21ce0b2fc0268de954dd23"
+          target="_blank"
+          rel="noreferrer"
+        >Following DuckStation licensing-change commit ↗</a>
+      </div>
+
+      <p>
+        That made <code>25bc8a6</code> the natural upstream boundary for
+        ArcadeDuck: it gave us years of newer DuckStation development compared
+        with the roughly 2021 codebase we inherited, while keeping the project
+        on the source lineage we could continue developing under ArcadeDuck's
+        GPL licensing.
+      </p>
+
+      <p>
+        The migration brought forward a substantially more modern emulator
+        foundation: newer rendering infrastructure, newer CPU and recompiler
+        work, input improvements, years of bug fixes, frontend changes,
+        refactoring, and performance work.
+      </p>
+
+      <p>
+        It was not a random old build somebody found behind the couch. It was a
+        deliberate boundary.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">The inevitable follow-up</p>
+      <h2>Why not just update to current DuckStation anyway?</h2>
+
+      <p>
+        Because at this point “update DuckStation” no longer means what it
+        sounds like.
+      </p>
+
+      <p>
+        ArcadeDuck has diverged substantially from the assumptions of a
+        consumer PlayStation emulator. The project now contains arcade-specific
+        ROM and CHD handling, board BIOS profiles, machine dispatch, SCSI
+        devices, EEPROM and flash persistence, cabinet controls, coin/test/
+        service behavior, multiple independent lightguns, trackballs,
+        specialized controllers, game-specific hardware profiles, an arcade
+        database, and frontend behavior designed around cabinets.
+      </p>
+
+      <p>
+        A current DuckStation release cannot simply be dropped underneath all
+        of that like updating a package dependency. Doing so would mean
+        manually porting and revalidating a significant amount of ArcadeDuck
+        against a codebase that has continued evolving independently.
+      </p>
+
+      <p>
+        Newer DuckStation source is also beyond the licensing boundary
+        ArcadeDuck deliberately selected. ArcadeDuck does not solve licensing
+        questions by pretending they aren't there.
+      </p>
+
+      <p>
+        So the project continues from its final GPL-era upstream baseline,
+        modernizing and replacing code as needed from <strong>our</strong> tree.
+        The objective is to make arcade games work better, not to win a
+        competition for the highest upstream commit number.
+      </p>
+
+      <p class="about-punchline">A revolutionary software-development concept, apparently.</p>
+    </section>
+
+    <section class="about-section about-name-section">
+      <p class="eyebrow">Brand strategy, allegedly</p>
+      <h2>Why “ArcadeDuck”?</h2>
+
+      <div class="name-equation" aria-label="Arcade plus DuckStation equals ArcadeDuck">
+        <span>Arcade</span>
+        <span class="name-symbol">+</span>
+        <span>DuckStation</span>
+        <span class="name-symbol">=</span>
+        <strong>ArcadeDuck</strong>
+      </div>
+
+      <p>That's it.</p>
+
+      <p>
+        No advertising agency was consulted. No focus groups were conducted.
+        Nobody spent six weeks standing in front of a whiteboard discussing
+        brand synergy. No presentation contained the phrase “next-generation
+        entertainment ecosystem.”
+      </p>
+
+      <p>
+        The name simply described what the project was becoming. The
+        <strong>Duck</strong> keeps an obvious connection to the DuckStation
+        lineage that made ArcadeDuck possible. The <strong>Arcade</strong>
+        makes equally clear where the project is going: not another
+        general-purpose PlayStation emulator, but an arcade emulator built
+        around hardware descended from PlayStation technology.
+      </p>
+
+      <p>
+        It also provided an entirely unnecessary number of future opportunities
+        for duck-related jokes and artwork. That may or may not have influenced
+        the decision.
+      </p>
+
+      <p class="about-tagline">DuckStation heritage. Arcade cabinet priorities. ArcadeDuck.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Hardware research</p>
+      <h2>Arcade hardware is weird.</h2>
+
+      <p>
+        The farther ArcadeDuck gets from the basic PlayStation architecture,
+        the less helpful the phrase “it's basically a PS1” becomes.
+      </p>
+
+      <p>
+        Yes, many of these machines begin with familiar PlayStation-derived
+        components. Then the arcade manufacturer adds a SCSI controller, a hard
+        disk, four flash chips, another CPU, a dedicated sound subsystem,
+        protection hardware, networking, EEPROM, custom cabinet I/O, a
+        trackball daughterboard, three lightguns, or some combination of the
+        above.
+      </p>
+
+      <p>And suddenly the PlayStation portion is the easy part.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Standing on excellent documentation</p>
+      <h2>MAME deserves a lot of credit.</h2>
+
+      <p>
+        ArcadeDuck exists partly because we wanted a different result for games
+        such as <em>The Simpsons Bowling</em>. That should not be interpreted as
+        “MAME is bad.” Quite the opposite.
+      </p>
+
+      <p>
+        MAME is one of the most important technical preservation projects in
+        the history of arcade hardware. Its developers and contributors have
+        spent decades documenting boards, CPUs, custom chips, ROM layouts,
+        storage devices, protection hardware, cabinet I/O, sound systems,
+        obscure peripherals, and machines whose surviving manufacturer
+        documentation ranges from excellent to “someone uploaded a blurry
+        photograph of the PCB in 2004. Good luck.”
+      </p>
+
+      <p>
+        MAME's hardware research has been an invaluable reference throughout
+        ArcadeDuck development. The fact that ArcadeDuck sometimes implements
+        a device differently, approaches a problem from another direction, or
+        exists because we wanted to improve behavior in a particular game does
+        not diminish that contribution.
+      </p>
+
+      <p>
+        Independent implementations are useful. MAME has broad preservation
+        goals across an almost absurd number of machines. ArcadeDuck has the
+        luxury of obsessing over a much narrower collection of hardware.
+      </p>
+
+      <p class="about-punchline">
+        We can spend an unreasonable amount of time on one SCSI timing problem.
+        We know this because we have. Repeatedly.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">More homework</p>
+      <h2>Other projects and documentation.</h2>
+
+      <p>
+        MAME is not the only technical reference ArcadeDuck uses. MiSTer and
+        other FPGA projects can provide valuable independent implementations of
+        the same arcade hardware. Original service manuals and schematics are
+        used whenever they survive. Chip datasheets are extremely useful. PCB
+        photographs can answer questions documentation does not. Other emulator
+        implementations can provide clues about undocumented behavior.
+      </p>
+
+      <p>
+        Sometimes all of those sources agree. Sometimes they don't. Sometimes
+        the manual says one thing, another implementation does something else,
+        the real game expects a third thing, and you end the evening reading a
+        30-year-old NCR SCSI datasheet for entertainment.
+      </p>
+
+      <p class="about-punchline">We use the word “entertainment” loosely.</p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Different priorities</p>
+      <h2>MAME wasn't wrong. We just wanted something different.</h2>
+
+      <p>
+        MAME's mission is enormous. ArcadeDuck's is deliberately narrow. That
+        allows ArcadeDuck to make decisions specifically around these machines
+        and the way people actually use arcade cabinets.
+      </p>
+
+      <ul class="about-feature-list">
+        <li>Per-game arcade control profiles</li>
+        <li>Lightguns as first-class devices</li>
+        <li>Multiple independent trackballs and pointer devices</li>
+        <li>Test, Service, Coin, and Start controls built around cabinet use</li>
+        <li>Board-specific EEPROM, flash, ROM, CHD, and BIOS behavior</li>
+        <li>An arcade game database rather than a retail PlayStation catalog</li>
+      </ul>
+
+      <p>
+        And yes, we can spend a stupid amount of time investigating why Homer
+        Simpson isn't talking. Different projects can have different
+        priorities. That's a good thing.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Acknowledgements</p>
+      <h2>Credit where it belongs.</h2>
+
+      <p>
+        ArcadeDuck exists because a lot of talented people did difficult work
+        before this project existed. That deserves more than a line hidden
+        somewhere in the source tree.
+      </p>
+
+      <div class="about-credit-grid">
+        <article class="about-credit-card">
+          <h3>DuckStation</h3>
+          <p>
+            <strong>Connor McLaughlin (stenzek) and the many DuckStation
+            contributors</strong> created and developed the PlayStation emulator
+            foundation from which ArcadeDuck ultimately descends. ArcadeDuck
+            would not exist without it.
+          </p>
+          <a href="https://github.com/stenzek/duckstation" target="_blank" rel="noreferrer">DuckStation repository ↗</a>
+        </article>
+
+        <article class="about-credit-card">
+          <h3>Arcade1Up Simpsons Bowling work</h3>
+          <p>
+            The developers responsible for <strong>Arcade1Up's
+            duckstation-sb</strong> implemented crucial pieces required by the
+            game's arcade hardware and demonstrated the DuckStation-based route
+            that started this entire project. The repository also credits
+            <strong>Datapower Development</strong> for additional code.
+          </p>
+          <a href="https://github.com/Arcade1Up/duckstation-sb" target="_blank" rel="noreferrer">Arcade1Up / duckstation-sb ↗</a>
+        </article>
+
+        <article class="about-credit-card">
+          <h3>t-dollaz</h3>
+          <p>
+            <strong>t-dollaz</strong> continued and expanded the Simpsons
+            Bowling work for desktop use and provided the immediate codebase
+            from which the earliest ArcadeDuck work developed.
+          </p>
+          <a href="https://github.com/t-dollaz/simpsons-bowling-baby-phoenix-duckstation" target="_blank" rel="noreferrer">t-dollaz Simpsons Bowling fork ↗</a>
+        </article>
+
+        <article class="about-credit-card">
+          <h3>MAME</h3>
+          <p>
+            The <strong>MAME development community</strong> has produced decades
+            of arcade hardware research and documentation that ArcadeDuck
+            regularly relies upon when understanding these systems.
+          </p>
+          <a href="https://github.com/mamedev/mame" target="_blank" rel="noreferrer">MAME repository ↗</a>
+        </article>
+
+        <article class="about-credit-card">
+          <h3>MiSTer and FPGA developers</h3>
+          <p>
+            Developers working on MiSTer and other FPGA arcade implementations
+            provide additional technical references and independent hardware
+            implementations that can be valuable when validating behavior.
+          </p>
+        </article>
+
+        <article class="about-credit-card">
+          <h3>Preservationists and hardware researchers</h3>
+          <p>
+            Credit also belongs to the people who dump ROMs, preserve disks,
+            scan manuals, archive datasheets, photograph PCBs, document
+            undocumented hardware, and identify mystery chips. Projects like
+            ArcadeDuck are downstream of all of that work.
+          </p>
+        </article>
+      </div>
+
+      <p class="about-punchline">
+        We blame t-dollaz accordingly. Respectfully.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <p class="eyebrow">Today</p>
+      <h2>What ArcadeDuck is now.</h2>
+
+      <p>
+        ArcadeDuck is no longer intended to be a PlayStation emulator with some
+        arcade games bolted onto it. It is becoming an
+        <strong>arcade emulator whose supported hardware happens to descend
+        from PlayStation technology</strong>.
+      </p>
+
+      <p>That distinction guides the project.</p>
+
+      <div class="about-arcade-grid">
+        <span>Joysticks</span>
+        <span>Buttons</span>
+        <span>Coins</span>
+        <span>Start</span>
+        <span>Test</span>
+        <span>Service</span>
+        <span>Trackballs</span>
+        <span>Lightguns</span>
+        <span>Specialized controls</span>
+        <span>Operator menus</span>
+        <span>EEPROM</span>
+        <span>Flash</span>
+        <span>SCSI CD-ROM</span>
+        <span>SCSI hard disks</span>
+        <span>Odd daughterboards</span>
+      </div>
+
+      <p>
+        We do not need memory cards simply because the PlayStation had memory
+        cards. We need EEPROM and flash because the arcade hardware had EEPROM
+        and flash. We do not need every consumer controller Sony ever released.
+        We need the controls the cabinet actually had.
+      </p>
+
+      <p>
+        The interface should feel like it belongs to an arcade emulator. The
+        game database should describe arcade sets. The control system should
+        describe arcade controls. The storage system should understand arcade
+        storage. The emulator should know what machine it is actually
+        emulating.
+      </p>
+
+      <p>
+        Konami GV was the beginning. Konami GQ followed. Namco System 11 is
+        underway. More PlayStation-derived arcade hardware is planned after
+        that.
+      </p>
+
+      <p class="about-question">How far does this eventually go?</p>
+      <p>That is an excellent question. We have intentionally stopped asking it.</p>
+    </section>
+
+    <section class="about-section about-finale">
+      <p class="eyebrow">The short version</p>
+      <h2>So why does ArcadeDuck exist?</h2>
+
+      <p>Because <em>The Simpsons Bowling</em> was missing its voices.</p>
+      <p>Because somebody discovered another implementation where they worked.</p>
+      <p>Because getting that implementation running properly exposed the hardware underneath it.</p>
+      <p>Because understanding one game turned into understanding Konami GV.</p>
+      <p>Because understanding GV made Konami GQ look possible.</p>
+      <p>Because apparently after successfully emulating two arcade platforms, looking at Namco System 11 seemed like a reasonable thing to do.</p>
+
+      <div class="about-final-question">
+        <span>“Why doesn't Homer talk?”</span>
+        <strong>“I guess we're building an arcade emulator.”</strong>
+      </div>
+
+      <p>
+        In retrospect, there were probably easier solutions. They would have
+        been considerably less interesting.
+      </p>
+    </section>
+
+    <section class="about-legal">
+      <h2>Project and licensing</h2>
+      <p>
+        ArcadeDuck is an independent open-source project. It is not affiliated
+        with or endorsed by Sony, Konami, Namco, Arcade1Up, DuckStation, MAME,
+        or the other companies and projects referenced here. Trademarks and
+        copyrighted works remain the property of their respective owners.
+      </p>
+      <p>
+        ArcadeDuck does not distribute game ROMs, BIOS images, CHDs, or other
+        copyrighted game media.
+      </p>
+      <p>
+        The project preserves attribution and licensing obligations inherited
+        from the open-source work on which it was built. Because if your
+        project exists because other people spent years doing the difficult
+        work before you arrived, giving them credit really shouldn't be
+        considered an optional feature.
+      </p>
+    </section>
+  </article>
+</SiteLayout>

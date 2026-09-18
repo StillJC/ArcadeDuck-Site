@@ -1,0 +1,75 @@
+---
+import '@fontsource-variable/exo-2';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'ArcadeDuck — arcade-focused emulation for PlayStation-derived arcade hardware.'
+} = Astro.props;
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href={base} aria-label="ArcadeDuck home">
+          <img
+            class="brand-logo"
+            src={`${base}images/brand/arcadeduck-logo-header.png`}
+            alt="ArcadeDuck"
+          />
+        </a>
+
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href={base}>Home</a>
+          <a href={`${base}download/`}>Download</a>
+          <a href={`${base}games/`}>Games</a>
+          <a href={`${base}systems/`}>Systems</a>
+          <a href={`${base}docs/`}>Documentation</a>
+          <a href={`${base}development/`}>Development</a>
+          <a href={`${base}about/`}>About</a>
+          <a
+            class="github-link"
+            href="https://github.com/StillJC/ArcadeDuck-Site"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>ArcadeDuck</span>
+
+        <div>
+          <a href={`${base}about/`}>About</a>
+          &nbsp;·&nbsp;
+          <a href="https://github.com/StillJC/ArcadeDuck-Site">Source</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,389 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<SiteLayout title="ArcadeDuck">
+  <section class="home-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Arcade Emulation</p>
+
+      <h1>ArcadeDuck</h1>
+
+      <p class="page-description">
+        Arcade-focused emulation for PlayStation-derived arcade hardware.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button button-primary" href={`${base}download/`}>
+          Download
+        </a>
+
+        <a class="button button-secondary" href={`${base}docs/`}>
+          Setup Guide
+        </a>
+
+        <a class="button button-secondary" href={`${base}games/`}>
+          Supported Games
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <img
+        src={`${base}images/brand/arcadeduck-wallpaper.png`}
+        alt="ArcadeDuck artwork"
+      />
+    </div>
+  </section>
+
+  <section class="status-strip" aria-label="ArcadeDuck project status">
+    <div class="status-item">
+      <span class="status-label">Platform</span>
+      <strong>Windows x64</strong>
+    </div>
+
+    <div class="status-item">
+      <span class="status-label">Development</span>
+      <strong class="status-active">Active</strong>
+    </div>
+
+    <div class="status-item">
+      <span class="status-label">Focus</span>
+      <strong>Arcade Hardware</strong>
+    </div>
+
+    <div class="status-item">
+      <span class="status-label">License</span>
+      <strong>GPL-3.0</strong>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Hardware Support</p>
+        <h2>Arcade systems</h2>
+      </div>
+
+      <a class="section-link" href={`${base}systems/`}>
+        View all systems →
+      </a>
+    </div>
+
+    <div class="system-grid">
+      <article class="system-card">
+        <div class="system-card-top">
+          <span class="system-family">Konami</span>
+          <span class="status-badge supported">Supported</span>
+        </div>
+
+        <h3>Konami GV</h3>
+
+        <p>
+          PlayStation-derived Konami arcade hardware with CD-ROM,
+          specialized controls, and game-specific daughterboards.
+        </p>
+
+        <a href={`${base}systems/`}>View systems →</a>
+      </article>
+
+      <article class="system-card">
+        <div class="system-card-top">
+          <span class="system-family">Konami</span>
+          <span class="status-badge supported">Supported</span>
+        </div>
+
+        <h3>Konami GQ</h3>
+
+        <p>
+          PlayStation-derived arcade hardware using SCSI storage,
+          expanded RAM, and dedicated Konami sound hardware.
+        </p>
+
+        <a href={`${base}systems/`}>View systems →</a>
+      </article>
+
+      <article class="system-card">
+        <div class="system-card-top">
+          <span class="system-family">Namco</span>
+          <span class="status-badge development">In Development</span>
+        </div>
+
+        <h3>System 11</h3>
+
+        <p>
+          Namco's PlayStation-derived arcade platform and the next
+          major hardware family targeted for ArcadeDuck.
+        </p>
+
+        <a href={`${base}systems/`}>View systems →</a>
+      </article>
+    </div>
+  </section>
+  <section class="home-section arcade-focus-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Designed for the Cabinet</p>
+        <h2>Built for arcade hardware</h2>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="feature-number">01</span>
+        <h3>Arcade media</h3>
+        <p>
+          Built around arcade ROM sets, CHDs, board-specific BIOS files,
+          and the storage formats used by the original hardware.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-number">02</span>
+        <h3>Cabinet controls</h3>
+        <p>
+          Dedicated support for coin, start, test, service, multiplayer
+          controls, and game-specific control layouts.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-number">03</span>
+        <h3>Arcade devices</h3>
+        <p>
+          Native profiles for joysticks, trackballs, lightguns, specialized
+          controllers, and multi-device Raw Input.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-number">04</span>
+        <h3>Per-game profiles</h3>
+        <p>
+          Save game-specific controls and configuration so each title can
+          launch with the hardware setup it actually needs.
+        </p>
+      </article>
+    </div>
+  </section>
+  <section class="home-section featured-games-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Featured Games</p>
+        <h2>Different hardware. One arcade-focused frontend.</h2>
+      </div>
+
+      <a class="section-link" href={`${base}games/`}>
+        Browse supported games →
+      </a>
+    </div>
+
+    <div class="featured-game-grid">
+      <article class="featured-game-card">
+        <a class="featured-game-image" href={`${base}games/`}>
+          <img
+            src={`${base}images/games/simpbowl.png`}
+            alt="The Simpsons Bowling running in ArcadeDuck"
+          />
+        </a>
+
+        <div class="featured-game-content">
+          <div class="featured-game-meta">
+            <span>Konami GV</span>
+            <span>Trackball</span>
+          </div>
+
+          <h3>The Simpsons Bowling</h3>
+
+          <p>
+            Dedicated trackball input with game-specific ArcadeDuck controls
+            and Konami GV hardware support.
+          </p>
+        </div>
+      </article>
+
+      <article class="featured-game-card">
+        <a class="featured-game-image" href={`${base}games/`}>
+          <img
+            src={`${base}images/games/kdeadeye.png`}
+            alt="Dead Eye running in ArcadeDuck"
+          />
+        </a>
+
+        <div class="featured-game-content">
+          <div class="featured-game-meta">
+            <span>Konami GV</span>
+            <span>Lightgun</span>
+          </div>
+
+          <h3>Dead Eye</h3>
+
+          <p>
+            Two-player lightgun support with independent pointer devices and
+            arcade-oriented input handling.
+          </p>
+        </div>
+      </article>
+
+      <article class="featured-game-card">
+        <a class="featured-game-image" href={`${base}games/`}>
+          <img
+            src={`${base}images/games/cryptklr.png`}
+            alt="Crypt Killer running in ArcadeDuck"
+          />
+        </a>
+
+        <div class="featured-game-content">
+          <div class="featured-game-meta">
+            <span>Konami GQ</span>
+            <span>Lightgun</span>
+          </div>
+
+          <h3>Crypt Killer</h3>
+
+          <p>
+            Konami GQ support combines SCSI storage, expanded arcade hardware,
+            and support for the game's multi-player gun controls.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="home-section quick-start-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Getting Started</p>
+        <h2>From download to arcade in four steps.</h2>
+      </div>
+
+      <a class="section-link" href={`${base}docs/`}>
+        Read the setup guide →
+      </a>
+    </div>
+
+    <div class="quick-start-grid">
+      <article class="quick-start-step">
+        <div class="quick-start-number">01</div>
+
+        <div>
+          <h3>Download ArcadeDuck</h3>
+          <p>
+            Get the current Windows build and extract ArcadeDuck to the
+            location you want to use.
+          </p>
+        </div>
+      </article>
+
+      <article class="quick-start-step">
+        <div class="quick-start-number">02</div>
+
+        <div>
+          <h3>Add BIOS files</h3>
+          <p>
+            Provide the required board-specific BIOS files for the arcade
+            hardware you want to run.
+          </p>
+        </div>
+      </article>
+
+      <article class="quick-start-step">
+        <div class="quick-start-number">03</div>
+
+        <div>
+          <h3>Add your games</h3>
+          <p>
+            Point ArcadeDuck at your supported arcade ROM and storage media
+            so your games can be added to the library.
+          </p>
+        </div>
+      </article>
+
+      <article class="quick-start-step">
+        <div class="quick-start-number">04</div>
+
+        <div>
+          <h3>Configure controls</h3>
+          <p>
+            Select the appropriate game profile and assign your arcade
+            controls, lightguns, trackballs, or other devices.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="quick-start-actions">
+      <a class="button button-primary" href={`${base}download/`}>
+        Download ArcadeDuck
+      </a>
+
+      <a class="button button-secondary" href={`${base}docs/`}>
+        Open Documentation
+      </a>
+    </div>
+  </section>
+  <section class="home-section development-status-section">
+    <div class="development-panel">
+      <div class="development-intro">
+        <p class="eyebrow">Development</p>
+
+        <h2>ArcadeDuck is under active development.</h2>
+
+        <p>
+          ArcadeDuck continues to expand support for PlayStation-derived
+          arcade systems while building an interface, input system, and
+          feature set designed specifically around arcade games.
+        </p>
+
+        <div class="development-actions">
+          <a class="button button-primary" href={`${base}development/`}>
+            Development Roadmap
+          </a>
+
+          <a
+            class="button button-secondary"
+            href="https://github.com/StillJC/ArcadeDuck-Site"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="development-columns">
+        <div class="development-column">
+          <p class="development-label">Completed</p>
+
+          <ul class="development-list completed-list">
+            <li>Konami GV support</li>
+            <li>Konami GQ support</li>
+            <li>Arcade-focused controls and profiles</li>
+            <li>Arcade-only game database foundation</li>
+          </ul>
+        </div>
+
+        <div class="development-column">
+          <p class="development-label">In Development</p>
+
+          <ul class="development-list active-list">
+            <li>Namco System 11</li>
+            <li>Additional arcade-focused features</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+
+
+
+
+
+
+
+
+
+

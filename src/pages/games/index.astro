@@ -1,0 +1,334 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+
+const databaseText = readFileSync(
+  new URL('../../../data/resources/arcadedb.yaml', import.meta.url),
+  'utf8'
+);
+
+const database = parse(databaseText);
+
+const systems = database.systems ?? {};
+const gameEntries = database.games ?? {};
+
+const supportStatus: Record<string, string> = {
+  konami_gv: 'Supported',
+  konami_gq: 'Supported',
+  namco_system11: 'In Development',
+};
+
+const supportClass: Record<string, string> = {
+  Supported: 'supported',
+  'In Development': 'development',
+  Planned: 'planned',
+};
+
+function getSupportStatus(systemId: string) {
+  return supportStatus[systemId] ?? 'Planned';
+}
+
+function getSystemName(systemId: string) {
+  return systems[systemId]?.name ?? systemId;
+}
+
+function formatControlName(value: string) {
+  const names: Record<string, string> = {
+    arcade: 'Arcade',
+    lightgun: 'Lightgun',
+    trackball: 'Trackball',
+    tokimeki: 'Tokimeki',
+    none: 'None',
+  };
+
+  return names[value] ?? value
+    .replaceAll('_', ' ')
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function getControls(game: any) {
+  const ports = game.controls?.ports ?? [];
+
+  const controls = [
+    ...new Set(
+      ports
+        .map((port: any) => port?.type)
+        .filter((type: string | undefined) => type && type !== 'none')
+    ),
+  ];
+
+  return controls.length
+    ? controls.map((control) => formatControlName(String(control))).join(', ')
+    : 'Standard';
+}
+
+const games = Object.entries(gameEntries)
+  .map(([id, value]) => {
+    const game = value as Record<string, any>;
+
+    return {
+      id,
+      ...game,
+      systemName: getSystemName(game.system),
+      supportStatus: getSupportStatus(game.system),
+      controlsLabel: getControls(game),
+    };
+  })
+  .sort((a, b) =>
+    String(a.sortTitle ?? a.title ?? a.id).localeCompare(
+      String(b.sortTitle ?? b.title ?? b.id)
+    )
+  );
+
+const referencedSystems = [
+  ...new Set(games.map((game) => String(game.system))),
+]
+  .map((id) => ({
+    id,
+    name: getSystemName(id),
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const regions = [
+  ...new Set(
+    games
+      .map((game) => String(game.region ?? ''))
+      .filter(Boolean)
+  ),
+].sort((a, b) => a.localeCompare(b));
+
+const controlTypes = [
+  ...new Set(
+    games
+      .map((game) => game.controlsLabel)
+      .filter((value) => value !== 'Standard')
+  ),
+].sort((a, b) => a.localeCompare(b));
+---
+
+<SiteLayout
+  title="Games | ArcadeDuck"
+  description="Browse the ArcadeDuck arcade game database by system, controls, region, and development status."
+>
+  <section class="page-hero games-hero">
+    <p class="eyebrow">Game Database</p>
+
+    <h1>Arcade games</h1>
+
+    <p class="page-description">
+      Browse titles in ArcadeDuck's canonical arcade database. Game metadata,
+      hardware information, controls, regions, and player counts are generated
+      directly from the same database used by ArcadeDuck.
+    </p>
+  </section>
+
+  <section class="game-browser">
+    <div class="game-browser-toolbar">
+      <div class="game-search-field">
+        <label for="game-search">Search games</label>
+        <input
+          id="game-search"
+          type="search"
+          placeholder="Title, set, manufacturer..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="game-filter">
+        <label for="system-filter">System</label>
+        <select id="system-filter">
+          <option value="">All systems</option>
+          {referencedSystems.map((system) => (
+            <option value={system.id}>{system.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="game-filter">
+        <label for="support-filter">ArcadeDuck status</label>
+        <select id="support-filter">
+          <option value="">All statuses</option>
+          <option value="supported">Supported</option>
+          <option value="in development">In Development</option>
+          <option value="planned">Planned</option>
+        </select>
+      </div>
+
+      <div class="game-filter">
+        <label for="control-filter">Controls</label>
+        <select id="control-filter">
+          <option value="">All controls</option>
+          {controlTypes.map((control) => (
+            <option value={control.toLowerCase()}>{control}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="game-filter">
+        <label for="region-filter">Region</label>
+        <select id="region-filter">
+          <option value="">All regions</option>
+          {regions.map((region) => (
+            <option value={region.toLowerCase()}>{region}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div class="game-browser-summary">
+      <span id="game-count">
+        Showing {games.length} of {games.length} games
+      </span>
+
+      <span class="database-source">
+        Generated from the ArcadeDuck game database
+      </span>
+    </div>
+
+    <div class="game-table-wrapper">
+      <table class="game-table">
+        <thead>
+          <tr>
+            <th>Game</th>
+            <th>System</th>
+            <th>Year</th>
+            <th>Region</th>
+            <th>Players</th>
+            <th>Controls</th>
+            <th>ArcadeDuck Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {games.map((game) => {
+            const status = game.supportStatus;
+            const statusCss = supportClass[status] ?? 'planned';
+
+            const searchText = [
+              game.title,
+              game.id,
+              game.manufacturer,
+              game.systemName,
+              game.region,
+              game.boardCode,
+              game.revision,
+            ]
+              .filter(Boolean)
+              .join(' ')
+              .toLowerCase();
+
+            return (
+              <tr
+                data-game-row
+                data-search={searchText}
+                data-system={String(game.system ?? '').toLowerCase()}
+                data-support={status.toLowerCase()}
+                data-controls={game.controlsLabel.toLowerCase()}
+                data-region={String(game.region ?? '').toLowerCase()}
+              >
+                <td class="game-title-cell">
+                  <strong>{game.title ?? game.id}</strong>
+
+                  <span class="game-set-name">{game.id}</span>
+                </td>
+
+                <td>{game.systemName}</td>
+
+                <td>{game.year || '—'}</td>
+
+                <td>{game.region || '—'}</td>
+
+                <td>
+                  {game.minPlayers === game.maxPlayers
+                    ? game.maxPlayers
+                    : `${game.minPlayers}–${game.maxPlayers}`}
+                </td>
+
+                <td>{game.controlsLabel}</td>
+
+                <td>
+                  <span class={`status-badge ${statusCss}`}>
+                    {status}
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="no-games" class="no-games-message" hidden>
+      No games match the selected filters.
+    </div>
+  </section>
+
+  <script>
+    const searchInput = document.querySelector('#game-search');
+    const systemFilter = document.querySelector('#system-filter');
+    const supportFilter = document.querySelector('#support-filter');
+    const controlFilter = document.querySelector('#control-filter');
+    const regionFilter = document.querySelector('#region-filter');
+    const countLabel = document.querySelector('#game-count');
+    const noGames = document.querySelector('#no-games');
+
+    const rows = Array.from(
+      document.querySelectorAll('[data-game-row]')
+    );
+
+    function getValue(element) {
+      return element instanceof HTMLInputElement ||
+        element instanceof HTMLSelectElement
+        ? element.value.trim().toLowerCase()
+        : '';
+    }
+
+    function applyGameFilters() {
+      const search = getValue(searchInput);
+      const system = getValue(systemFilter);
+      const support = getValue(supportFilter);
+      const control = getValue(controlFilter);
+      const region = getValue(regionFilter);
+
+      let visible = 0;
+
+      for (const row of rows) {
+        if (!(row instanceof HTMLElement))
+          continue;
+
+        const matches =
+          (!search || (row.dataset.search ?? '').includes(search)) &&
+          (!system || row.dataset.system === system) &&
+          (!support || row.dataset.support === support) &&
+          (!control || (row.dataset.controls ?? '').includes(control)) &&
+          (!region || row.dataset.region === region);
+
+        row.hidden = !matches;
+
+        if (matches)
+          visible++;
+      }
+
+      if (countLabel)
+        countLabel.textContent = `Showing ${visible} of ${rows.length} games`;
+
+      if (noGames instanceof HTMLElement)
+        noGames.hidden = visible !== 0;
+    }
+
+    for (const element of [
+      searchInput,
+      systemFilter,
+      supportFilter,
+      controlFilter,
+      regionFilter,
+    ]) {
+      element?.addEventListener('input', applyGameFilters);
+      element?.addEventListener('change', applyGameFilters);
+    }
+  </script>
+</SiteLayout>
+
+
