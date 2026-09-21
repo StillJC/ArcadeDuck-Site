@@ -114,6 +114,19 @@ const controlTypes = [
       .filter((value) => value !== 'Standard')
   ),
 ].sort((a, b) => a.localeCompare(b));
+const requiredBios = [
+  { system: 'Konami GV', archive: 'konamigv.zip' },
+  { system: 'Konami GQ', archive: 'Included in complete non-merged game set' },
+  { system: 'Namco System 11', archive: 'namcoc76.zip' },
+  { system: 'Capcom ZN-1', archive: 'coh1000c.zip' },
+  { system: 'Taito FX-1', archive: 'coh1000t.zip' },
+  { system: 'Acclaim ZN-1', archive: 'coh1000a.zip' },
+  { system: 'Time Warner ZN-1', archive: 'coh1000w.zip' },
+  { system: 'Atlus ZN-1', archive: 'coh1001l.zip' },
+  { system: 'Video System ZN-1', archive: 'coh1002v.zip' },
+  { system: 'Eighting / Raizing ZN-1', archive: 'coh1002e.zip' },
+  { system: 'Tecmo TPS System', archive: 'coh1002m.zip' },
+];
 ---
 
 <SiteLayout
@@ -129,6 +142,45 @@ const controlTypes = [
       Browse titles in ArcadeDuck's canonical arcade database. Game metadata,
       hardware information, controls, regions, and player counts are generated
       directly from the same database used by ArcadeDuck.
+    </p>
+  </section>
+
+  <section class="bios-requirements">
+    <p class="eyebrow">Required Files</p>
+    <h2>Current BIOS files</h2>
+    <p>
+      Keep BIOS archives in their original ZIP format and file names.
+    </p>
+
+    <div class="game-table-wrapper">
+      <table class="game-table">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Required BIOS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {requiredBios.map((bios) => (
+            <tr>
+              <td><strong>{bios.system}</strong></td>
+              <td><code>{bios.archive}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">ROM Set Requirement</p>
+      <h2>Use complete non-merged MAME 0.286+ sets.</h2>
+    </div>
+
+    <p>
+      ArcadeDuck currently expects complete non-merged MAME ROM sets from
+      version 0.286 or newer. Split, merged, or older sets may fail ROM
+      validation or loading even when the archive name appears correct.
     </p>
   </section>
 

@@ -17,6 +17,39 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
     </p>
   </section>
 
+  <section class="systems-status-section setup-video-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Getting Started</p>
+        <h2>ArcadeDuck introduction and setup video</h2>
+      </div>
+
+      <p>
+        Watch the setup walkthrough directly here, or open it separately on
+        YouTube.
+      </p>
+    </div>
+
+    <div class="setup-video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/cFTN-Xjj2PQ"
+        title="ArcadeDuck introduction and setup video"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <p class="setup-video-link">
+      <a
+        href="https://www.youtube.com/watch?v=cFTN-Xjj2PQ"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open the setup video on YouTube &rarr;
+      </a>
+    </p>
+  </section>
   <section class="systems-status-section">
     <div class="systems-group-heading">
       <div>
@@ -37,15 +70,57 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
           <a href={`${base}docs/building/`}>Open build instructions &rarr;</a>
         </p>
       </article>
-
-      <article class="planned-system-card">
-        <span class="hardware-manufacturer">More Documentation</span>
-        <h3>User setup and troubleshooting</h3>
-        <p>
-          Game setup, controls, configuration, and troubleshooting guides are
-          being expanded as public testing continues.
-        </p>
-      </article>
     </div>
   </section>
+  <style>
+    .setup-video-section .systems-group-heading {
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    .setup-video-section .systems-group-heading h2 {
+      max-width: 900px;
+      margin-bottom: 16px;
+    }
+
+    .setup-video-section .systems-group-heading > p {
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .setup-video-section .setup-video-heading {
+      display: block;
+      max-width: 900px;
+      margin-bottom: 30px;
+    }
+
+    .setup-video-section .setup-video-heading h2 {
+      margin-bottom: 16px;
+    }
+
+    .setup-video-section .setup-video-heading > p:last-child {
+      max-width: 720px;
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .setup-video-frame {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 9;
+      margin-top: 1.5rem;
+    }
+
+    .setup-video-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 14px;
+    }
+
+    .setup-video-link {
+      margin-top: 1rem;
+    }
+  </style>
 </SiteLayout>
