@@ -1,18 +1,51 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
-<SiteLayout title="Documentation | ArcadeDuck">
+<SiteLayout
+  title="Documentation | ArcadeDuck"
+  description="ArcadeDuck documentation for installation, building from source, game setup, controls, configuration, and troubleshooting."
+>
   <section class="page-hero">
     <p class="eyebrow">Help</p>
     <h1>Documentation</h1>
     <p class="page-description">
-      Installation, game setup, controls, configuration, and troubleshooting.
+      Installation, building from source, game setup, controls, configuration,
+      and troubleshooting.
     </p>
   </section>
 
-  <section class="placeholder-panel">
-    <h2>Documentation coming soon</h2>
-    <p>The documentation structure will be built after the main site shell.</p>
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Developer Documentation</p>
+        <h2>Build ArcadeDuck on Windows</h2>
+      </div>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Windows x64</span>
+        <h3>Building from source</h3>
+        <p>
+          Clone the source, install the validated dependency package, and build
+          ArcadeDuck with Visual Studio/MSBuild.
+        </p>
+        <p>
+          <a href={`${base}docs/building/`}>Open build instructions â†’</a>
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">More Documentation</span>
+        <h3>User setup and troubleshooting</h3>
+        <p>
+          Game setup, controls, configuration, and troubleshooting guides are
+          being expanded as public testing continues.
+        </p>
+      </article>
+    </div>
   </section>
 </SiteLayout>

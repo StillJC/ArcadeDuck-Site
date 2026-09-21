@@ -1,0 +1,253 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Building ArcadeDuck | ArcadeDuck"
+  description="Windows x64 build instructions for ArcadeDuck, including prerequisites, dependency packages, Visual Studio setup, and third-party source information."
+>
+  <section class="page-hero">
+    <p class="eyebrow">Documentation</p>
+    <h1>Building ArcadeDuck from source</h1>
+    <p class="page-description">
+      ArcadeDuck currently supports building on Windows x64 using the
+      Visual Studio/MSBuild workflow.
+    </p>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Requirements</p>
+        <h2>What you need</h2>
+      </div>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Required</span>
+        <h3>Git</h3>
+        <p>
+          Used to clone ArcadeDuck and switch between the main development and
+          experimental hardware branches.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Required</span>
+        <h3>Visual Studio 2022</h3>
+        <p>
+          Install the <strong>Desktop development with C++</strong> workload
+          and a Windows SDK.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Required</span>
+        <h3>Windows x64 dependency package</h3>
+        <p>
+          ArcadeDuck uses a prebuilt third-party dependency bundle for the
+          normal Windows build workflow.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Optional</span>
+        <h3>LLVM / Clang</h3>
+        <p>
+          Install LLVM/Clang if you want to use one of the Clang-based build
+          configurations.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Step 1</p>
+        <h2>Clone ArcadeDuck</h2>
+      </div>
+    </div>
+
+    <pre><code>git clone https://github.com/StillJC/ArcadeDuck.git
+cd ArcadeDuck</code></pre>
+
+    <p>
+      For current development work, switch to the <code>dev</code> branch
+      unless you specifically need one of the experimental hardware branches.
+    </p>
+
+    <pre><code>git switch dev</code></pre>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Step 2</p>
+        <h2>Install the Windows dependencies</h2>
+      </div>
+
+      <p>
+        The dependency package is intentionally kept out of Git and distributed
+        separately from the source repository.
+      </p>
+    </div>
+
+    <p>
+      From the ArcadeDuck release assets, download the current files matching:
+    </p>
+
+    <pre><code>ArcadeDuck-Windows-x64-Dependencies-*.zip
+ArcadeDuck-Windows-x64-Dependency-Sources-*.zip
+SHA256SUMS.txt</code></pre>
+
+    <p>
+      The <strong>Dependencies</strong> ZIP is required to build ArcadeDuck.
+      The <strong>Dependency-Sources</strong> ZIP preserves the corresponding
+      third-party source archives and notices.
+    </p>
+
+    <p>
+      Verify the dependency ZIP against <code>SHA256SUMS.txt</code>, then
+      extract the <strong>contents</strong> of the dependency ZIP directly into
+      the ArcadeDuck repository root.
+    </p>
+
+    <p>After extraction, this file should exist:</p>
+
+    <pre><code>dep\msvc\deps-x64\bin\uic.exe</code></pre>
+
+    <p>Third-party package metadata is installed under:</p>
+
+    <pre><code>dep\msvc\dependency-metadata\</code></pre>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Step 3</p>
+        <h2>Build the solution</h2>
+      </div>
+    </div>
+
+    <p>Open the Visual Studio solution:</p>
+
+    <pre><code>ArcadeDuck.sln</code></pre>
+
+    <p>
+      Select an appropriate x64 configuration and build the solution in Visual
+      Studio.
+    </p>
+
+    <p>
+      The dependency package has been validated using a fresh ArcadeDuck
+      worktree and the Visual Studio/MSBuild build path.
+    </p>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Advanced</p>
+        <h2>Rebuilding the dependency tree</h2>
+      </div>
+    </div>
+
+    <p>
+      The prebuilt dependency package is the recommended route for contributors.
+      If you need to rebuild the Windows x64 third-party dependency tree
+      yourself, ArcadeDuck includes:
+    </p>
+
+    <pre><code>scripts\deps\build-dependencies-windows-x64.bat</code></pre>
+
+    <p>
+      That script defines the dependency versions, source locations, and hashes
+      used by the project. Rebuilding the full dependency set requires
+      additional developer tools beyond a normal ArcadeDuck build.
+    </p>
+  </section>
+
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Platform Development</p>
+        <h2>Porting ArcadeDuck</h2>
+      </div>
+
+      <p>
+        Windows x64 is the only currently supported and validated build target,
+        but contributions for additional platforms and frontends are welcome.
+      </p>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Platform Port</span>
+        <h3>Linux, Android, macOS, and other targets</h3>
+        <p>
+          New targets should use an appropriate native or reproducible
+          dependency workflow rather than relying on the Windows dependency
+          package.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Frontend Port</span>
+        <h3>RetroArch / libretro</h3>
+        <p>
+          A libretro target is not just another operating-system build. It
+          requires a frontend adapter for content loading, configuration,
+          input, audio/video, arcade peripherals, external outputs, and other
+          standalone ArcadeDuck behavior.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Architecture</span>
+        <h3>Keep shared code portable</h3>
+        <p>
+          Platform-specific code should remain isolated from the shared emulator
+          and arcade-hardware implementation wherever practical. New ports
+          should avoid introducing Windows-only assumptions into shared code.
+        </p>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Contribution Workflow</span>
+        <h3>Coordinate large ports early</h3>
+        <p>
+          Large platform or frontend ports should be discussed through GitHub
+          before restructuring shared subsystems. Keep toolchain and dependency
+          setup reproducible and document it with the target.
+        </p>
+      </article>
+    </div>
+  </section>
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">Important</p>
+      <h2>Visual Studio/MSBuild is the supported packaged workflow.</h2>
+    </div>
+
+    <p>
+      Some generated Qt CMake metadata can contain paths from the machine on
+      which Qt was originally built. The prebuilt dependency package should not
+      currently be treated as a portable standalone CMake SDK.
+    </p>
+  </section>
+
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">Third-Party Sources</p>
+      <h2>Keep the source package with the dependency release.</h2>
+    </div>
+
+    <p>
+      The dependency source package preserves the exact third-party source
+      archives or commits corresponding to the published Windows x64 dependency
+      bundle, together with source hashes and collected license/notice files.
+    </p>
+  </section>
+</SiteLayout>
