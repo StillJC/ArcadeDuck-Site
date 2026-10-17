@@ -1,0 +1,286 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Command-Line Launching | ArcadeDuck"
+  description="Launch ArcadeDuck from the command line, cabinet frontends, and scripts, including split and merged ROM-set clone launching."
+>
+  <section class="page-hero command-line-hero">
+    <p class="eyebrow">Documentation</p>
+    <h1>Command-line launching</h1>
+    <p class="page-description">
+      Launch arcade sets directly from Windows, cabinet frontends, shortcuts,
+      or scripts. ArcadeDuck also supports selecting clone sets from split and
+      merged ROM collections on supported hardware.
+    </p>
+  </section>
+
+  <section class="systems-status-section command-line-docs">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Quick Start</p>
+        <h2>Launch a set directly</h2>
+      </div>
+      <p>
+        The boot filename must be a recognized ArcadeDuck ZIP archive. Quote
+        Windows paths when they contain spaces.
+      </p>
+    </div>
+
+    <pre><code>ArcadeDuck.exe "D:\Arcade\roms\tekken.zip"</code></pre>
+
+    <p>
+      For a cabinet or external frontend, <code>-nogui</code> suppresses the
+      main ArcadeDuck window and exits when emulation shuts down.
+      <code>-fullscreen</code> starts the game in fullscreen.
+    </p>
+
+    <pre><code>ArcadeDuck.exe -nogui -fullscreen "D:\Arcade\roms\tekken.zip"</code></pre>
+  </section>
+
+  <section class="systems-status-section command-line-docs">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">ROM Sets</p>
+        <h2>Non-merged, split, and merged layouts</h2>
+      </div>
+      <p>
+        ArcadeDuck's database describes logical game sets. Supported machine
+        handlers can resolve those definitions from different physical ZIP
+        layouts.
+      </p>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Non-Merged</span>
+        <h3>Launch the game's ZIP</h3>
+        <p>A complete set has its own archive. Launch that archive directly.</p>
+        <pre><code>ArcadeDuck.exe "D:\Arcade\roms\tekkenac.zip"</code></pre>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Split</span>
+        <h3>Clone plus parent archives</h3>
+        <p>
+          A clone ZIP may contain only clone-specific ROMs. ArcadeDuck searches
+          the clone and its parent chain, including matching sibling archives
+          in the same ROM directory and indexed archives.
+        </p>
+        <pre><code>ArcadeDuck.exe "D:\Arcade\roms\tekkenac.zip"</code></pre>
+      </article>
+
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Merged</span>
+        <h3>Select the logical clone</h3>
+        <p>
+          Launch the physical parent ZIP and use <code>-arcadegame</code> to
+          select the clone definition stored inside the merged collection.
+        </p>
+        <pre><code>ArcadeDuck.exe "D:\Arcade\roms\tekken.zip" -arcadegame tekkenac</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <section class="systems-status-section command-line-docs">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Merged Clone Example</p>
+        <h2>What <code>-arcadegame</code> means</h2>
+      </div>
+    </div>
+
+    <pre><code>ArcadeDuck.exe -nogui -fullscreen "D:\Arcade\roms\tekken.zip" -arcadegame tekkenac</code></pre>
+
+    <p>
+      In this command, <code>tekken.zip</code> is the physical archive being
+      opened and <code>tekkenac</code> is the logical ArcadeDuck game ID to
+      boot. The requested ID must exist in ArcadeDuck's arcade database and
+      must be the archive's own set or a descendant of that set.
+    </p>
+
+    <p>
+      ArcadeDuck scans ZIP members by ROM metadata and accepts matching members
+      stored in subdirectories inside a merged archive. For supported split
+      layouts, it also searches the selected game's parent archive chain.
+    </p>
+  </section>
+
+  <section class="systems-status-section command-line-docs">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Current Support</p>
+        <h2>Hardware with split/merged ROM resolution</h2>
+      </div>
+      <p>
+        Split and merged ROM-set handling is currently enabled only for the
+        machine handlers listed below. This is not yet a project-wide feature
+        for every ArcadeDuck system.
+      </p>
+    </div>
+
+    <div class="hardware-tags command-line-tags">
+      <span>Namco System 11</span>
+      <span>Capcom ZN-1</span>
+      <span>Capcom ZN-2</span>
+      <span>Taito FX-1</span>
+      <span>Acclaim ZN-1</span>
+      <span>Time Warner ZN-1</span>
+      <span>Atlus ZN-1</span>
+      <span>Video System ZN-1</span>
+      <span>Eighting / Raizing ZN-1</span>
+      <span>Tecmo TPS</span>
+    </div>
+  </section>
+
+  <section class="systems-status-section command-line-docs">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Common Launches</p>
+        <h2>Ready-to-use examples</h2>
+      </div>
+    </div>
+
+    <pre><code># Normal direct launch
+ArcadeDuck.exe "D:\Arcade\roms\tekken.zip"
+
+# Fullscreen launch
+ArcadeDuck.exe -fullscreen "D:\Arcade\roms\tekken.zip"
+
+# Cabinet/frontend launch with no main ArcadeDuck window
+ArcadeDuck.exe -nogui -fullscreen "D:\Arcade\roms\tekken.zip"
+
+# Launch a clone from a merged parent archive
+ArcadeDuck.exe -nogui -fullscreen "D:\Arcade\roms\tekken.zip" -arcadegame tekkenac
+
+# Use a separate settings file
+ArcadeDuck.exe -settings "cabinet.ini" "D:\Arcade\roms\tekken.zip"
+
+# Show the built-in command-line help
+ArcadeDuck.exe -help</code></pre>
+  </section>
+
+  <section class="systems-status-section command-line-docs">
+    <div class="systems-group-heading">
+      <div>
+        <p class="eyebrow">Option Reference</p>
+        <h2>Public command-line options</h2>
+      </div>
+      <p>
+        <code>ArcadeDuck.exe -help</code> is the built-in reference shipped
+        with the executable.
+      </p>
+    </div>
+
+    <div class="command-option-table-wrapper">
+      <table class="command-option-table">
+        <thead>
+          <tr><th>Option</th><th>Behavior</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>-help</code></td><td>Displays command-line help and exits.</td></tr>
+          <tr><td><code>-version</code></td><td>Displays version information and exits.</td></tr>
+          <tr><td><code>-arcadegame &lt;id&gt;</code></td><td>Selects the logical arcade game to launch from the supplied archive, including clones from supported split or merged sets.</td></tr>
+          <tr><td><code>-fullscreen</code></td><td>Enters fullscreen mode immediately after starting.</td></tr>
+          <tr><td><code>-nofullscreen</code></td><td>Prevents fullscreen mode from triggering when it would otherwise be enabled.</td></tr>
+          <tr><td><code>-nogui</code></td><td>Suppresses the main window and exits when the emulated system shuts down.</td></tr>
+          <tr><td><code>-settings &lt;filename&gt;</code></td><td>Loads a custom settings configuration; default settings are used if the file does not exist.</td></tr>
+          <tr><td><code>-earlyconsole</code></td><td>Creates the console as early as possible for logging.</td></tr>
+          <tr><td><code>--</code></td><td>Stops option parsing so the remaining arguments are treated as the boot filename.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="systems-note">
+    <div>
+      <p class="eyebrow">Paths</p>
+      <h2>Quote Windows paths containing spaces.</h2>
+    </div>
+    <p>
+      Use <code>--</code> when you need to explicitly end option parsing,
+      especially when a boot filename could begin with a dash. The boot archive
+      itself must exist and be recognized by ArcadeDuck's arcade database.
+    </p>
+  </section>
+
+  <style>
+    .command-line-hero { max-width: 940px; }
+
+    .command-line-docs > p {
+      max-width: 900px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .command-line-docs pre {
+      overflow-x: auto;
+      margin: 22px 0;
+      padding: 20px 22px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(18, 16, 28, 0.78);
+    }
+
+    .command-line-docs pre code {
+      color: #d9c8ff;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .command-line-docs .planned-system-card pre {
+      margin-bottom: 0;
+      padding: 15px 16px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .command-line-tags { gap: 10px; }
+
+    .command-option-table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .command-option-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      background: rgba(18, 16, 28, 0.68);
+    }
+
+    .command-option-table th {
+      padding: 15px 18px;
+      color: var(--text-muted);
+      background: rgba(156, 92, 255, 0.055);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .command-option-table td {
+      padding: 17px 18px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      line-height: 1.55;
+      vertical-align: top;
+    }
+
+    .command-option-table td:first-child {
+      width: 220px;
+      white-space: nowrap;
+    }
+
+    .command-option-table code,
+    .systems-note code,
+    .command-line-docs p code {
+      color: #d9c8ff;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+  </style>
+</SiteLayout>

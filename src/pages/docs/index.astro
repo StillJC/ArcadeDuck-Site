@@ -53,6 +53,44 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
   <section class="systems-status-section">
     <div class="systems-group-heading">
       <div>
+        <p class="eyebrow">User Documentation</p>
+        <h2>ArcadeDuck user guides</h2>
+      </div>
+
+      <p>
+        Launch ArcadeDuck from frontends and scripts, and configure native MAME
+        cheat packages for supported arcade sets.
+      </p>
+    </div>
+
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Frontends &amp; Cabinets</span>
+        <h3>Command-line launching</h3>
+        <p>
+          Direct launching, fullscreen and no-GUI modes, merged-set clone
+          selection, ROM-set layouts, and the complete command-line reference.
+        </p>
+        <p>
+          <a href={`${base}docs/command-line/`}>Open command-line guide &rarr;</a>
+        </p>
+      </article>
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">MAME XML</span>
+        <h3>Native MAME cheats</h3>
+        <p>
+          Set up <code>cheat.7z</code> or loose shortname XML files, use cheats
+          from the Qt or fullscreen interface, and troubleshoot loading.
+        </p>
+        <p>
+          <a href={`${base}docs/cheats/`}>Open MAME cheat guide &rarr;</a>
+        </p>
+      </article>
+    </div>
+  </section>
+  <section class="systems-status-section">
+    <div class="systems-group-heading">
+      <div>
         <p class="eyebrow">Developer Documentation</p>
         <h2>Build ArcadeDuck on Windows</h2>
       </div>
