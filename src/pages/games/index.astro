@@ -20,6 +20,8 @@ const supportStatus: Record<string, string> = {
   namco_system11: 'Supported',
   capcom_zn1: 'Supported',
   capcom_zn2: 'Supported',
+  taito_gnet: 'Supported',
+  taito_gnet_zn1: 'Supported',
   taito_fx1: 'Supported',
   acclaim_zn1: 'Supported',
   time_warner_zn1: 'Supported',
@@ -32,57 +34,31 @@ const supportStatus: Record<string, string> = {
 const supportClass: Record<string, string> = {
   Supported: 'supported',
   'In Development': 'development',
-  Planned: 'planned',
 };
 
 function getSupportStatus(systemId: string) {
-  return supportStatus[systemId] ?? 'Planned';
+  return supportStatus[systemId] ?? 'In Development';
 }
 
 function getSystemName(systemId: string) {
   return systems[systemId]?.name ?? systemId;
 }
 
-function formatControlName(value: string) {
-  const names: Record<string, string> = {
-    arcade: 'Arcade',
-    lightgun: 'Lightgun',
-    trackball: 'Trackball',
-    tokimeki: 'Tokimeki',
-    none: 'None',
-  };
-
-  return names[value] ?? value
-    .replaceAll('_', ' ')
-    .replace(/\b\w/g, (character) => character.toUpperCase());
-}
-
-function getControls(game: any) {
-  const ports = game.controls?.ports ?? [];
-
-  const controls = [
-    ...new Set(
-      ports
-        .map((port: any) => port?.type)
-        .filter((type: string | undefined) => type && type !== 'none')
-    ),
-  ];
-
-  return controls.length
-    ? controls.map((control) => formatControlName(String(control))).join(', ')
-    : 'Standard';
+function getDisplaySystemId(systemId: string) {
+  return systemId === 'taito_gnet_zn1' ? 'taito_gnet' : systemId;
 }
 
 const games = Object.entries(gameEntries)
   .map(([id, value]) => {
     const game = value as Record<string, any>;
+    const displaySystemId = getDisplaySystemId(String(game.system));
 
     return {
       id,
       ...game,
-      systemName: getSystemName(game.system),
-      supportStatus: getSupportStatus(game.system),
-      controlsLabel: getControls(game),
+      displaySystemId,
+      systemName: getSystemName(displaySystemId),
+      supportStatus: getSupportStatus(displaySystemId),
     };
   })
   .sort((a, b) =>
@@ -92,7 +68,7 @@ const games = Object.entries(gameEntries)
   );
 
 const referencedSystems = [
-  ...new Set(games.map((game) => String(game.system))),
+  ...new Set(games.map((game) => game.displaySystemId)),
 ]
   .map((id) => ({
     id,
@@ -100,27 +76,13 @@ const referencedSystems = [
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-const regions = [
-  ...new Set(
-    games
-      .map((game) => String(game.region ?? ''))
-      .filter(Boolean)
-  ),
-].sort((a, b) => a.localeCompare(b));
-
-const controlTypes = [
-  ...new Set(
-    games
-      .map((game) => game.controlsLabel)
-      .filter((value) => value !== 'Standard')
-  ),
-].sort((a, b) => a.localeCompare(b));
 const requiredBios = [
   { system: 'Konami GV', archive: 'konamigv.zip' },
-  { system: 'Konami GQ', archive: 'Included in complete non-merged game set' },
+  { system: 'Konami GQ', archive: 'No separate BIOS ZIP required' },
   { system: 'Namco System 11', archive: 'namcoc76.zip' },
   { system: 'Capcom ZN-1', archive: 'coh1000c.zip' },
   { system: 'Capcom ZN-2', archive: 'coh3002c.zip' },
+  { system: 'Taito G-Net', archive: 'coh3002t.zip or coh1002t.zip (game-dependent)' },
   { system: 'Taito FX-1', archive: 'coh1000t.zip' },
   { system: 'Acclaim ZN-1', archive: 'coh1000a.zip' },
   { system: 'Time Warner ZN-1', archive: 'coh1000w.zip' },
@@ -133,7 +95,7 @@ const requiredBios = [
 
 <SiteLayout
   title="Games | ArcadeDuck"
-  description="Browse the ArcadeDuck arcade game database by system, controls, region, and development status."
+  description="Browse the ArcadeDuck arcade game database by system and development status."
 >
   <section class="page-hero games-hero">
     <p class="eyebrow">Game Database</p>
@@ -142,7 +104,7 @@ const requiredBios = [
 
     <p class="page-description">
       Browse titles in ArcadeDuck's canonical arcade database. Game metadata,
-      hardware information, controls, regions, and player counts are generated
+      hardware information and player counts are generated
       directly from the same database used by ArcadeDuck.
     </p>
   </section>
@@ -175,14 +137,15 @@ const requiredBios = [
   </section>
   <section class="systems-note">
     <div>
-      <p class="eyebrow">ROM Set Requirement</p>
-      <h2>Use complete non-merged MAME 0.286+ sets.</h2>
+      <p class="eyebrow">ROM Set Support</p>
+      <h2>Use non-merged, split, or merged ROM sets.</h2>
     </div>
 
     <p>
-      ArcadeDuck currently expects complete non-merged MAME ROM sets from
-      version 0.286 or newer. Split, merged, or older sets may fail ROM
-      validation or loading even when the archive name appears correct.
+      ArcadeDuck supports non-merged, split, and merged MAME-style ROM layouts.
+      The database defines each game as a complete logical set, while parent and
+      clone relationships let ArcadeDuck resolve shared ROMs from the archives
+      available in your ROM directory.
     </p>
   </section>
 
@@ -214,29 +177,10 @@ const requiredBios = [
           <option value="">All statuses</option>
           <option value="supported">Supported</option>
           <option value="in development">In Development</option>
-          <option value="planned">Planned</option>
         </select>
       </div>
 
-      <div class="game-filter">
-        <label for="control-filter">Controls</label>
-        <select id="control-filter">
-          <option value="">All controls</option>
-          {controlTypes.map((control) => (
-            <option value={control.toLowerCase()}>{control}</option>
-          ))}
-        </select>
-      </div>
 
-      <div class="game-filter">
-        <label for="region-filter">Region</label>
-        <select id="region-filter">
-          <option value="">All regions</option>
-          {regions.map((region) => (
-            <option value={region.toLowerCase()}>{region}</option>
-          ))}
-        </select>
-      </div>
     </div>
 
     <div class="game-browser-summary">
@@ -256,9 +200,7 @@ const requiredBios = [
             <th>Game</th>
             <th>System</th>
             <th>Year</th>
-            <th>Region</th>
             <th>Players</th>
-            <th>Controls</th>
             <th>ArcadeDuck Status</th>
           </tr>
         </thead>
@@ -273,7 +215,6 @@ const requiredBios = [
               game.id,
               game.manufacturer,
               game.systemName,
-              game.region,
               game.boardCode,
               game.revision,
             ]
@@ -285,10 +226,8 @@ const requiredBios = [
               <tr
                 data-game-row
                 data-search={searchText}
-                data-system={String(game.system ?? '').toLowerCase()}
+                data-system={game.displaySystemId.toLowerCase()}
                 data-support={status.toLowerCase()}
-                data-controls={game.controlsLabel.toLowerCase()}
-                data-region={String(game.region ?? '').toLowerCase()}
               >
                 <td class="game-title-cell">
                   <strong>{game.title ?? game.id}</strong>
@@ -300,15 +239,11 @@ const requiredBios = [
 
                 <td>{game.year || '—'}</td>
 
-                <td>{game.region || '—'}</td>
-
                 <td>
                   {game.minPlayers === game.maxPlayers
                     ? game.maxPlayers
                     : `${game.minPlayers}–${game.maxPlayers}`}
                 </td>
-
-                <td>{game.controlsLabel}</td>
 
                 <td>
                   <span class={`status-badge ${statusCss}`}>
@@ -331,8 +266,6 @@ const requiredBios = [
     const searchInput = document.querySelector('#game-search');
     const systemFilter = document.querySelector('#system-filter');
     const supportFilter = document.querySelector('#support-filter');
-    const controlFilter = document.querySelector('#control-filter');
-    const regionFilter = document.querySelector('#region-filter');
     const countLabel = document.querySelector('#game-count');
     const noGames = document.querySelector('#no-games');
 
@@ -351,8 +284,6 @@ const requiredBios = [
       const search = getValue(searchInput);
       const system = getValue(systemFilter);
       const support = getValue(supportFilter);
-      const control = getValue(controlFilter);
-      const region = getValue(regionFilter);
 
       let visible = 0;
 
@@ -363,9 +294,7 @@ const requiredBios = [
         const matches =
           (!search || (row.dataset.search ?? '').includes(search)) &&
           (!system || row.dataset.system === system) &&
-          (!support || row.dataset.support === support) &&
-          (!control || (row.dataset.controls ?? '').includes(control)) &&
-          (!region || row.dataset.region === region);
+          (!support || row.dataset.support === support);
 
         row.hidden = !matches;
 
@@ -384,8 +313,6 @@ const requiredBios = [
       searchInput,
       systemFilter,
       supportFilter,
-      controlFilter,
-      regionFilter,
     ]) {
       element?.addEventListener('input', applyGameFilters);
       element?.addEventListener('change', applyGameFilters);

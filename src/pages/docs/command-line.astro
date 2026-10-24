@@ -11,8 +11,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
     <h1>Command-line launching</h1>
     <p class="page-description">
       Launch arcade sets directly from Windows, cabinet frontends, shortcuts,
-      or scripts. ArcadeDuck also supports selecting clone sets from split and
-      merged ROM collections on supported hardware.
+      or scripts. ArcadeDuck supports non-merged, split, and merged ROM layouts,
+      including selecting logical clones from merged collections.
     </p>
   </section>
 
@@ -46,8 +46,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
         <h2>Non-merged, split, and merged layouts</h2>
       </div>
       <p>
-        ArcadeDuck's database describes logical game sets. Supported machine
-        handlers can resolve those definitions from different physical ZIP
+        ArcadeDuck's database describes complete logical game sets and resolves
+        those definitions from non-merged, split, or merged physical ZIP
         layouts.
       </p>
     </div>
@@ -102,35 +102,23 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
     <p>
       ArcadeDuck scans ZIP members by ROM metadata and accepts matching members
-      stored in subdirectories inside a merged archive. For supported split
-      layouts, it also searches the selected game's parent archive chain.
+      stored in subdirectories inside a merged archive. For split layouts, it
+      also searches the selected game's parent archive chain.
     </p>
   </section>
 
   <section class="systems-status-section command-line-docs">
     <div class="systems-group-heading">
       <div>
-        <p class="eyebrow">Current Support</p>
-        <h2>Hardware with split/merged ROM resolution</h2>
+        <p class="eyebrow">ROM Resolution</p>
+        <h2>One resolver for supported arcade systems</h2>
       </div>
       <p>
-        Split and merged ROM-set handling is currently enabled only for the
-        machine handlers listed below. This is not yet a project-wide feature
-        for every ArcadeDuck system.
+        Non-merged, split, and merged ROM handling is part of ArcadeDuck's
+        standard arcade ROM resolver. There is no separate ROM-set type setting;
+        ArcadeDuck uses the game's database definition and parent lineage to find
+        the required ROMs from the archives that are present.
       </p>
-    </div>
-
-    <div class="hardware-tags command-line-tags">
-      <span>Namco System 11</span>
-      <span>Capcom ZN-1</span>
-      <span>Capcom ZN-2</span>
-      <span>Taito FX-1</span>
-      <span>Acclaim ZN-1</span>
-      <span>Time Warner ZN-1</span>
-      <span>Atlus ZN-1</span>
-      <span>Video System ZN-1</span>
-      <span>Eighting / Raizing ZN-1</span>
-      <span>Tecmo TPS</span>
     </div>
   </section>
 
@@ -181,7 +169,7 @@ ArcadeDuck.exe -help</code></pre>
         <tbody>
           <tr><td><code>-help</code></td><td>Displays command-line help and exits.</td></tr>
           <tr><td><code>-version</code></td><td>Displays version information and exits.</td></tr>
-          <tr><td><code>-arcadegame &lt;id&gt;</code></td><td>Selects the logical arcade game to launch from the supplied archive, including clones from supported split or merged sets.</td></tr>
+          <tr><td><code>-arcadegame &lt;id&gt;</code></td><td>Selects the logical arcade game to launch from the supplied archive, including clones from split or merged sets.</td></tr>
           <tr><td><code>-fullscreen</code></td><td>Enters fullscreen mode immediately after starting.</td></tr>
           <tr><td><code>-nofullscreen</code></td><td>Prevents fullscreen mode from triggering when it would otherwise be enabled.</td></tr>
           <tr><td><code>-nogui</code></td><td>Suppresses the main window and exits when the emulated system shuts down.</td></tr>

@@ -4,7 +4,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
 <SiteLayout
   title="Systems | ArcadeDuck"
-  description="Arcade hardware supported, under development, and planned for ArcadeDuck."
+  description="Arcade hardware supported and under development for ArcadeDuck."
 >
   <section class="page-hero systems-hero">
     <p class="eyebrow">Hardware Roadmap</p>
@@ -13,7 +13,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
     <p class="page-description">
       ArcadeDuck is focused on PlayStation-derived and related arcade hardware.
-      This page tracks systems that are supported and planned for future implementation.
+      This page tracks systems that are supported and currently under development.
     </p>
   </section>
 
@@ -131,6 +131,29 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span>ZN-2</span>
           <span>COH-3002C</span>
           <span>QSound</span>
+        </div>
+      </article>
+
+      <article class="hardware-card supported-hardware">
+        <div class="hardware-card-header">
+          <div>
+            <span class="hardware-manufacturer">Taito</span>
+            <h3>Taito G-Net</h3>
+          </div>
+          <span class="status-badge supported">Supported</span>
+        </div>
+
+        <p>
+          Taito's removable-media PlayStation-derived platform, including
+          COH-3002T and COH-1002T hardware variants.
+        </p>
+
+        <div class="hardware-tags">
+          <span>ZN-2 Family</span>
+          <span>ZN-1 Family</span>
+          <span>COH-3002T</span>
+          <span>COH-1002T</span>
+          <span>PC Card / CompactFlash</span>
         </div>
       </article>
 
@@ -262,12 +285,12 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 <section class="systems-status-section planned-systems-section">
     <div class="systems-group-heading">
       <div>
-        <p class="eyebrow">Future Hardware</p>
-        <h2>Planned systems</h2>
+        <p class="eyebrow">Active Development</p>
+        <h2>In Development</h2>
       </div>
 
       <p>
-        Accepted long-term ArcadeDuck targets. Order does not represent
+        Arcade hardware currently being implemented. Order does not represent
         implementation priority.
       </p>
     </div>
@@ -275,17 +298,9 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
     <div class="planned-system-grid">
 
       <article class="planned-system-card">
-        <span class="hardware-manufacturer">Taito</span>
-        <h3>G-Net</h3>
-        <p>
-          Taito arcade hardware based around PlayStation technology and
-          removable game media.
-        </p>
-      </article>
-
-      <article class="planned-system-card">
         <span class="hardware-manufacturer">Namco</span>
         <h3>System 12</h3>
+        <span class="status-badge development">In Development</span>
         <p>
           Successor to System 11 with expanded PlayStation-derived arcade hardware.
         </p>
@@ -294,6 +309,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
       <article class="planned-system-card">
         <span class="hardware-manufacturer">Namco</span>
         <h3>System 10</h3>
+        <span class="status-badge development">In Development</span>
         <p>
           Later Namco PlayStation-derived hardware with additional storage
           and protection requirements.
@@ -303,6 +319,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
       <article class="planned-system-card">
         <span class="hardware-manufacturer">Konami</span>
         <h3>System 573</h3>
+        <span class="status-badge development">In Development</span>
         <p>
           Konami PlayStation-derived arcade hardware used across a wide range
           of cabinet and peripheral configurations.
@@ -312,6 +329,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
       <article class="planned-system-card">
         <span class="hardware-manufacturer">Konami</span>
         <h3>Twinkle</h3>
+        <span class="status-badge development">In Development</span>
         <p>
           Specialized Konami arcade platform retained as its own hardware family.
         </p>
@@ -328,9 +346,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
     </div>
 
     <p>
-      Planned systems are added as ArcadeDuck reaches stable milestones on
-      existing hardware. A planned listing indicates accepted project scope,
-      not a promised release date.
+      Systems listed as In Development are active ArcadeDuck implementation targets.
+      Development status indicates current project work, not a promised release date.
     </p>
   </section>
 </SiteLayout>
