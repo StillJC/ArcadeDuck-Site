@@ -18,6 +18,7 @@ const supportStatus: Record<string, string> = {
   konami_gv: 'Supported',
   konami_gq: 'Supported',
   namco_system11: 'Supported',
+  namco_system12: 'Supported',
   capcom_zn1: 'Supported',
   capcom_zn2: 'Supported',
   taito_gnet: 'Supported',
@@ -80,6 +81,8 @@ const requiredBios = [
   { system: 'Konami GV', archive: 'konamigv.zip' },
   { system: 'Konami GQ', archive: 'No separate BIOS ZIP required' },
   { system: 'Namco System 11', archive: 'namcoc76.zip' },
+  { system: 'Namco System 12', archive: 'No separate BIOS ZIP required' },
+  { system: 'Namco System 12 — Cyber Lead LED hardware', archive: 'namco_cyberlead_led.zip' },
   { system: 'Capcom ZN-1', archive: 'coh1000c.zip' },
   { system: 'Capcom ZN-2', archive: 'coh3002c.zip' },
   { system: 'Taito G-Net', archive: 'coh3002t.zip or coh1002t.zip (game-dependent)' },
@@ -114,6 +117,16 @@ const requiredBios = [
     <h2>Current BIOS files</h2>
     <p>
       Keep BIOS archives in their original ZIP format and file names.
+    </p>
+    <p>
+      System 12 boot code and H8 sound/I/O firmware are supplied by each game's
+      ROM set. No separate System 12 BIOS archive is required.
+    </p>
+    <p>
+      For System 12 games using Cyber Lead cabinets, place
+      <code>namco_cyberlead_led.zip</code> in the BIOS folder when enabling LED
+      hardware emulation. LED hardware emulation is disabled by default;
+      cabinet JVS controls remain available without it.
     </p>
 
     <div class="game-table-wrapper">

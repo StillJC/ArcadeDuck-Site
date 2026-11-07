@@ -114,8 +114,24 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
         <h3>System 11</h3>
 
         <p>
-          Namco's PlayStation-derived arcade platform and the next
-          major hardware family targeted for ArcadeDuck.
+          Namco's PlayStation-derived arcade platform with board-specific
+          controls, sound, peripherals, and external outputs.
+        </p>
+
+        <a href={`${base}systems/`}>View systems →</a>
+      </article>
+
+      <article class="system-card">
+        <div class="system-card-top">
+          <span class="system-family">Namco</span>
+          <span class="status-badge supported">Supported</span>
+        </div>
+
+        <h3>System 12</h3>
+
+        <p>
+          Expanded Namco arcade hardware with JVS cabinet controls
+          and optional Cyber Lead LED hardware emulation.
         </p>
 
         <a href={`${base}systems/`}>View systems →</a>
@@ -360,6 +376,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
             <li>Konami GV support</li>
             <li>Konami GQ support</li>
             <li>Namco System 11 support</li>
+            <li>Namco System 12 support</li>
             <li>Sony ZN-1 hardware families</li>
             <li>Arcade-focused controls and profiles</li>
             <li>Arcade-only game database foundation</li>
