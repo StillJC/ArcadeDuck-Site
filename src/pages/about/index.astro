@@ -1,10 +1,12 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
 <SiteLayout
   title="About | ArcadeDuck"
-  description="The story behind ArcadeDuck: The Simpsons Bowling, DuckStation, Konami GV, audited source provenance, and the projects and people whose work made ArcadeDuck possible."
+  description="The story behind ArcadeDuck: The Simpsons Bowling, DuckStation, Konami GV, and the projects and people whose work made ArcadeDuck possible."
 >
   <section class="page-hero about-hero">
     <p class="eyebrow">About ArcadeDuck</p>
@@ -19,15 +21,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
   <article class="about-page">
     <section class="about-opening">
-      <p>
-        Somewhere between that goal and the present day, the project acquired
-        SCSI controllers, flash memory, EEPROMs, trackballs, lightguns, arcade
-        I/O, board-specific BIOS handling, an arcade-only game database,
-        specialized controller profiles, multiple hardware families, and a
-        frontend that increasingly wants nothing to do with pretending these
-        machines are ordinary PlayStations.
-      </p>
-      <p class="about-punchline">So that went well.</p>
+      <p>One game became an arcade hardware project. So that went well.</p>
     </section>
 
     <section class="about-section">
@@ -95,366 +89,28 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
       <p>That was the beginning of ArcadeDuck. We just didn't know it yet.</p>
     </section>
-    <section class="about-section">
-      <p class="eyebrow">Milestone one</p>
-      <h2>First, make Homer talk.</h2>
-
-      <p>
-        The initial goal was not to create another PlayStation emulator.
-        DuckStation already existed, and creating a new PS1 emulator from
-        scratch because Homer Simpson refused to announce a turkey would have
-        been excessive even by our standards.
-      </p>
-
-      <p>
-        Instead, the goal was to understand the arcade-specific work that had
-        already been done around <em>The Simpsons Bowling</em> and make it
-        practical on Windows.
-      </p>
-
-      <p>
-        The game runs on <strong>Konami GV</strong>, a PlayStation-derived
-        arcade platform, but its cabinet includes hardware that an ordinary
-        consumer PlayStation emulator has absolutely no reason to care about:
-        SCSI storage, EEPROM, flash memory, trackball hardware, cabinet inputs,
-        arcade-specific boot behavior, and a dedicated daughterboard.
-      </p>
-
-      <p>
-        In other words, everything required to turn “it's basically a
-        PlayStation” into “why the hell isn't this register responding?”
-      </p>
-
-      <p>
-        The first real milestone was getting all of that working reliably while
-        preserving the thing that started the whole project:
-        <strong>the voices worked.</strong>
-      </p>
-
-      <p class="about-punchline">Mission accomplished. Project over. Obviously.</p>
-    </section>
 
     <section class="about-section">
       <p class="eyebrow">Scope control</p>
       <h2>Then we noticed there were other games.</h2>
-
-      <p>
-        Once <em>The Simpsons Bowling</em> was working, something inconvenient
-        became apparent: we had not merely fixed one game. We had implemented
-        a substantial amount of <strong>Konami GV</strong>.
-      </p>
-
-      <p class="about-question">What about the rest of the GV library?</p>
-
-      <p>
-        That meant standard joystick games, trackball games, two-player
-        trackball games, independent lightguns, specialized control hardware,
-        EEPROM and flash persistence, game-specific hardware configurations,
-        more accurate SCSI behavior, operator controls, Test and Service modes,
-        and all the other things that make an arcade machine an arcade machine
-        instead of a PlayStation wearing a very expensive wooden costume.
-      </p>
-
-      <p>
-        Eventually, supporting the entire Konami GV family became the goal.
-        Then GV worked. That would have been an excellent place to stop.
-      </p>
-
-      <p>
-        What began with <strong>Konami GV</strong> has expanded through{' '}
-        <strong>Konami GQ</strong>,{' '}
-        <strong>Namco System 11</strong>, and{' '}
-        <strong>Sony ZN-1</strong>. Work has continued into later and more
-        complicated PlayStation-derived platforms including{' '}
-        <strong>ZN-2</strong>,{' '}
-        <strong>Taito G-Net</strong>,{' '}
-        <strong>Namco System 12</strong>, and additional hardware families.
-      </p>
-
-      <p>Because apparently two guns were insufficient.</p>
-
+      <p>Getting the voices working meant understanding the Konami GV hardware underneath the game. Supporting the rest of that library seemed reasonable. Then Konami GQ, Namco, and Sony-derived arcade boards joined the argument.</p>
       <p class="about-punchline">We remain disappointed by this failure of scope control.</p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Audited source provenance</p>
-      <h2>Where the current ArcadeDuck source actually comes from.</h2>
-
-      <p>
-        ArcadeDuck is built on DuckStation source. The current lineage is not
-        inferred from dates, similar files, or old project descriptions. It was
-        reconstructed directly from the repository's Git graph during an
-        extensive provenance audit.
-      </p>
-
-      <div class="lineage" aria-label="ArcadeDuck active source lineage">
-        <a
-          class="lineage-step"
-          href="https://github.com/stenzek/duckstation/commit/2149ab4d6955bfa60cd56856aeb05aebef9e4a1a"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span class="lineage-label">Inherited root</span>
-          <strong>DuckStation</strong>
-          <span><code>2149ab4d6955bfa60cd56856aeb05aebef9e4a1a</code></span>
-        </a>
-
-        <span class="lineage-arrow" aria-hidden="true">&darr;</span>
-
-        <a
-          class="lineage-step"
-          href="https://github.com/stenzek/duckstation/commit/25bc8a64803df7e702db66e0f11d7b7d0fdc99f2"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span class="lineage-label">Last inherited DuckStation commit</span>
-          <strong>GPL-era Git boundary</strong>
-          <span><code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code></span>
-        </a>
-
-        <span class="lineage-arrow" aria-hidden="true">&darr;</span>
-
-        <div class="lineage-step lineage-current">
-          <span class="lineage-label">First ArcadeDuck commit</span>
-          <strong>ArcadeDuck active lineage</strong>
-          <span><code>53f4ae558af0d569143d7ef7698f1328b71cdec7</code></span>
-        </div>
-      </div>
-
-      <p>
-        The first ArcadeDuck commit,
-        <code>53f4ae558af0d569143d7ef7698f1328b71cdec7</code>,
-        has exactly one parent:
-        <code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code>.
-        That establishes the active project's inherited DuckStation boundary
-        directly from repository history.
-      </p>
-
-      <p>
-        The following historical DuckStation commit,
-        <code>9ca6b5430fb358b39f21ce0b2fc0268de954dd23</code>,
-        changed the project's source licensing. The audit therefore treats
-        <code>25bc8a6</code> as the Git-graph boundary &mdash; not as a blanket
-        claim that every individual file at that revision carried the same
-        license.
-      </p>
-
-      <div class="about-links">
-        <a
-          href="https://github.com/stenzek/duckstation/commit/25bc8a64803df7e702db66e0f11d7b7d0fdc99f2"
-          target="_blank"
-          rel="noreferrer"
-        >Inherited DuckStation boundary &#8599;</a>
-
-        <a
-          href="https://github.com/stenzek/duckstation/commit/9ca6b5430fb358b39f21ce0b2fc0268de954dd23"
-          target="_blank"
-          rel="noreferrer"
-        >Following licensing-change commit &#8599;</a>
-      </div>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">The five-file exception</p>
-      <h2>The boundary had five file-level exceptions.</h2>
-
-      <p>
-        The repository-level license at the inherited boundary was GPLv3, but
-        the audit identified <strong>five source files</strong> that already
-        carried <code>PolyForm-Strict-1.0.0</code>-only SPDX headers before the
-        broader project licensing change.
-      </p>
-
-      <div class="about-code-card">
-        <span>PolyForm-only audio rewrite</span>
-        <code>00634f68cc0fc187068c9df08a4ea3564938c60a</code>
-        <strong>
-          src/util/audio_stream.cpp<br />
-          src/util/audio_stream.h
-        </strong>
-      </div>
-
-      <div class="about-code-card">
-        <span>PolyForm-only software rasterizer split</span>
-        <code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code>
-        <strong>
-          src/core/gpu_sw_rasterizer.cpp<br />
-          src/core/gpu_sw_rasterizer.h<br />
-          src/core/gpu_sw_rasterizer.inl
-        </strong>
-      </div>
-
-      <p>
-        That is why ArcadeDuck does not describe <code>25bc8a6</code> as simply
-        "the last GPL version." It is the correct Git boundary, but those five
-        file-level exceptions required separate treatment.
-      </p>
-
-      <p class="about-punchline">
-        Apparently even the clean boundary had a boundary condition.
-      </p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Historical cleanup</p>
-      <h2>The five exceptions were removed or restored before the first public release.</h2>
-
-      <div class="about-code-card">
-        <span>Restoration / removal commit</span>
-        <code>3f119ddfc13d51ad68d5134ef09fde54ae23315b</code>
-        <strong>August 27, 2026</strong>
-      </div>
-
-      <p>
-        That commit removed the separate PolyForm-era software rasterizer and
-        restored the older software-rendering path. The two audio files were
-        substantially restored to the earlier implementation that carried a GPL
-        licensing alternative, then continued forward with ArcadeDuck's own
-        audio changes.
-      </p>
-
-      <p>
-        The provenance audit compared the restored source against both the older
-        implementation and the intervening PolyForm rewrite. Its normalized
-        comparison found{' '}
-        <strong>zero retained lines
-        unique to the PolyForm rewrite</strong> in the compared current
-        audio/backend implementations, while hundreds of meaningful lines
-        matched the older implementation.
-      </p>
-
-      <p>
-        The audited source contained no
-        <code>PolyForm-Strict-1.0.0</code>-only or
-        <code>CC-BY-NC-ND-4.0</code>-only SPDX declarations in the scanned
-        current text headers.
-      </p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Earlier proof of concept</p>
-      <h2>Arcade1Up and t-dollaz are part of the history, not the current Git ancestry.</h2>
-
-      <p>
-        ArcadeDuck's earliest proof-of-concept work used the{' '}
-        <strong>Arcade1Up Simpsons Bowling DuckStation fork</strong> and the
-        later <strong>t-dollaz desktop continuation</strong>. Those projects
-        were important references for understanding the cabinet-specific
-        hardware and getting the original Simpsons Bowling experiment moving.
-      </p>
-
-      <p>
-        The provenance audit confirmed that the older proof-of-concept is a{' '}
-        <strong>separate snapshot history</strong>. It is not an ancestor of
-        the current ArcadeDuck <code>dev</code> lineage.
-      </p>
-
-      <p>
-        They remain credited because they are genuinely part of ArcadeDuck's
-        history. They are simply no longer presented as the Git ancestry of the
-        source tree being released today.
-      </p>
-
-      <div class="about-links">
-        <a
-          href="https://github.com/Arcade1Up/duckstation-sb"
-          target="_blank"
-          rel="noreferrer"
-        >Arcade1Up / duckstation-sb &#8599;</a>
-
-        <a
-          href="https://github.com/t-dollaz/simpsons-bowling-baby-phoenix-duckstation"
-          target="_blank"
-          rel="noreferrer"
-        >t-dollaz continuation &#8599;</a>
-      </div>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Repository-wide review</p>
-      <h2>Provenance was checked, not assumed.</h2>
-
-      <p>
-        The provenance review enumerated all{' '}
-        <strong>2,145 tracked files</strong> in the audited checkout and
-        scanned tracked text for SPDX identifiers, copyright notices, license
-        text, and upstream/reference markers.
-      </p>
-
-      <p>
-        Reachable history, branch tips, historical license changes, candidate
-        upstream matches, third-party notices, source attribution, and the
-        identified file-level licensing exceptions were then reviewed in
-        detail.
-      </p>
-
-      <p>
-        Even minor or possible findings were remediated before the public
-        repository was created. The public repository was then started from the
-        verified clean source snapshot instead of publishing the old forensic
-        development history.
-      </p>
-
-      <div class="about-code-card">
-        <span>Initial clean public source commit</span>
-        <code>13a1d6a02428efe4ec00e531ccd8e29c1fd0bc0e</code>
-        <strong>Initial public source release</strong>
-      </div>
-
-      <p class="about-punchline">
-        Trust is useful. Reproducible commit hashes are considerably more useful.
-      </p>
+      <p><a href={`${base}systems/`}>Explore the hardware ArcadeDuck supports &rarr;</a></p>
     </section>
     <section class="about-section">
       <p class="eyebrow">Project direction</p>
-      <h2>Why not just submit all of this upstream?</h2>
-
-      <p>
-        Because this is ultimately a choice about what an emulator should be
-        built to do.
-      </p>
-
-      <p>
-        <strong>Console emulators should emulate console games. Arcade emulators
-        should emulate arcade games.</strong>
-      </p>
-
-      <p>
-        DuckStation is an excellent PlayStation emulator, and ArcadeDuck would
-        not exist without the work that came before it. But the farther this
-        project developed, the clearer it became that arcade hardware has
-        different priorities: coin inputs, Test and Service controls,
-        lightguns, trackballs, cabinet I/O, external outputs, EEPROM and flash,
-        SCSI devices, board-specific storage, unusual peripherals, dedicated
-        sound hardware, networking, and operator behavior that has little or
-        nothing to do with emulating a consumer PlayStation.
-      </p>
-
-      <p>
-        Those features could theoretically be developed as patches against a
-        console emulator. That is simply not the direction I want to take.
-        ArcadeDuck is intentionally built around the arcade machine first,
-        rather than asking a console emulator to accommodate an increasingly
-        large arcade subsystem.
-      </p>
-
-      <p>
-        <strong>That decision is not about fame. It is not about money. It is not about
-        pretending the PlayStation emulation underneath ArcadeDuck was created
-        here, and it is certainly not about taking credit away from the people
-        whose work made this project possible.</strong>
-      </p>
-
-      <p>
-        It is a personal development choice: keep the console emulator focused
-        on consoles, keep the arcade emulator focused on arcade machines, and
-        give each project the freedom to make decisions around its own goals.
-      </p>
-
-      <p class="about-punchline">
-        Same family tree. Different cabinet.
-      </p>
+      <h2>Same family tree. Different cabinet.</h2>
+      <p>DuckStation provided the PlayStation emulation foundation. ArcadeDuck builds around the arcade machine: its operator controls, storage, sound hardware, peripherals, and cabinet I/O.</p>
+      <p>That focus is why ArcadeDuck is a separate project. MAME's hardware research, independent emulator and FPGA implementations, service manuals, and chip datasheets help us understand the machines.</p>
+      <p>Apparently reading a 30-year-old SCSI datasheet now qualifies as entertainment.</p>
     </section>
+    <section class="about-section">
+      <p class="eyebrow">Source history</p>
+      <h2>Where the code comes from.</h2>
+      <p>The recorded DuckStation lineage, file-level licensing exceptions, and cleanup before the initial public release are documented separately.</p>
+      <p><a href={`${base}about/provenance/`}>Read the source provenance record &rarr;</a></p>
+    </section>
+
     <section class="about-section about-name-section">
       <p class="eyebrow">Brand strategy, allegedly</p>
       <h2>Why “ArcadeDuck”?</h2>
@@ -492,116 +148,6 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
       </p>
 
       <p class="about-tagline">DuckStation heritage. Arcade cabinet priorities. ArcadeDuck.</p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Hardware research</p>
-      <h2>Arcade hardware is weird.</h2>
-
-      <p>
-        The farther ArcadeDuck gets from the basic PlayStation architecture,
-        the less helpful the phrase “it's basically a PS1” becomes.
-      </p>
-
-      <p>
-        Yes, many of these machines begin with familiar PlayStation-derived
-        components. Then the arcade manufacturer adds a SCSI controller, a hard
-        disk, four flash chips, another CPU, a dedicated sound subsystem,
-        protection hardware, networking, EEPROM, custom cabinet I/O, a
-        trackball daughterboard, three lightguns, or some combination of the
-        above.
-      </p>
-
-      <p>And suddenly the PlayStation portion is the easy part.</p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Standing on excellent documentation</p>
-      <h2>MAME deserves a lot of credit.</h2>
-
-      <p>
-        ArcadeDuck exists partly because we wanted a different result for games
-        such as <em>The Simpsons Bowling</em>. That should not be interpreted as
-        “MAME is bad.” Quite the opposite.
-      </p>
-
-      <p>
-        MAME is one of the most important technical preservation projects in
-        the history of arcade hardware. Its developers and contributors have
-        spent decades documenting boards, CPUs, custom chips, ROM layouts,
-        storage devices, protection hardware, cabinet I/O, sound systems,
-        obscure peripherals, and machines whose surviving manufacturer
-        documentation ranges from excellent to “someone uploaded a blurry
-        photograph of the PCB in 2004. Good luck.”
-      </p>
-
-      <p>
-        MAME's hardware research has been an invaluable reference throughout
-        ArcadeDuck development. The fact that ArcadeDuck sometimes implements
-        a device differently, approaches a problem from another direction, or
-        exists because we wanted to improve behavior in a particular game does
-        not diminish that contribution.
-      </p>
-
-      <p>
-        Independent implementations are useful. MAME has broad preservation
-        goals across an almost absurd number of machines. ArcadeDuck has the
-        luxury of obsessing over a much narrower collection of hardware.
-      </p>
-
-      <p class="about-punchline">
-        We can spend an unreasonable amount of time on one SCSI timing problem.
-        We know this because we have. Repeatedly.
-      </p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">More homework</p>
-      <h2>Other projects and documentation.</h2>
-
-      <p>
-        MAME is not the only technical reference ArcadeDuck uses. MiSTer and
-        other FPGA projects can provide valuable independent implementations of
-        the same arcade hardware. Original service manuals and schematics are
-        used whenever they survive. Chip datasheets are extremely useful. PCB
-        photographs can answer questions documentation does not. Other emulator
-        implementations can provide clues about undocumented behavior.
-      </p>
-
-      <p>
-        Sometimes all of those sources agree. Sometimes they don't. Sometimes
-        the manual says one thing, another implementation does something else,
-        the real game expects a third thing, and you end the evening reading a
-        30-year-old NCR SCSI datasheet for entertainment.
-      </p>
-
-      <p class="about-punchline">We use the word “entertainment” loosely.</p>
-    </section>
-
-    <section class="about-section">
-      <p class="eyebrow">Different priorities</p>
-      <h2>MAME wasn't wrong. We just wanted something different.</h2>
-
-      <p>
-        MAME's mission is enormous. ArcadeDuck's is deliberately narrow. That
-        allows ArcadeDuck to make decisions specifically around these machines
-        and the way people actually use arcade cabinets.
-      </p>
-
-      <ul class="about-feature-list">
-        <li>Per-game arcade control profiles</li>
-        <li>Lightguns as first-class devices</li>
-        <li>Multiple independent trackballs and pointer devices</li>
-        <li>Test, Service, Coin, and Start controls built around cabinet use</li>
-        <li>Board-specific EEPROM, flash, ROM, CHD, and BIOS behavior</li>
-        <li>An arcade game database rather than a retail PlayStation catalog</li>
-      </ul>
-
-      <p>
-        And yes, we can spend a stupid amount of time investigating why Homer
-        Simpson isn't talking. Different projects can have different
-        priorities. That's a good thing.
-      </p>
     </section>
 
     <section class="about-section">
@@ -684,71 +230,6 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
       </p>
     </section>
 
-    <section class="about-section">
-      <p class="eyebrow">Today</p>
-      <h2>What ArcadeDuck is now.</h2>
-
-      <p>
-        ArcadeDuck has moved well beyond being a PlayStation emulator with a
-        few arcade games attached to it. It is an{' '}
-        <strong>arcade emulator focused specifically on hardware derived from
-        PlayStation technology</strong>.
-      </p>
-
-      <p>
-        That means the machine matters as much as the CPU and GPU. ArcadeDuck
-        models the things that actually made these systems arcade hardware:
-        board-specific BIOS behavior, ROM and CHD layouts, SCSI devices,
-        EEPROM and flash storage, cabinet inputs, Test and Service controls,
-        lightguns, trackballs, specialized I/O, dedicated sound hardware,
-        external outputs, and the strange daughterboards manufacturers added
-        because apparently the base hardware was not complicated enough.
-      </p>
-
-      <p>
-        The interface, game database, control system, storage handling, and
-        machine configuration are all being built around arcade hardware rather
-        than around the assumptions of a consumer PlayStation.
-      </p>
-
-      <p>
-        What began with <strong>Konami GV</strong> has expanded through{' '}
-        <strong>Konami GQ</strong>, <strong>Namco System 11</strong>, and
-        <strong>Sony ZN-1</strong>. Work has continued into later and more
-        complicated PlayStation-derived platforms including
-        <strong>ZN-2</strong>, <strong>Taito G-Net</strong>,
-        <strong>Namco System 12</strong>, and additional hardware families.
-      </p>
-
-      <p>
-        Some of those later systems remain experimental while their hardware,
-        timing, audio, protection, peripherals, and game-specific behavior are
-        researched and validated.
-      </p>
-
-      <p class="about-question">How far does this eventually go?</p>
-      <p>That is still an excellent question. We are still deliberately not asking it.</p>
-    </section>
-    <section class="about-section about-finale">
-      <p class="eyebrow">The short version</p>
-      <h2>So why does ArcadeDuck exist?</h2>
-
-      <p>Because <em>The Simpsons Bowling</em> was missing its voices.</p>
-      <p>Because getting one game right exposed an entire arcade platform underneath it.</p>
-      <p>Because understanding Konami GV made Konami GQ look possible.</p>
-      <p>Because System 11 and ZN-1 made stopping there seem unnecessarily sensible.</p>
-      <p>Because ZN-2, G-Net, System 12, and several other machines then joined the argument.</p>
-
-      <div class="about-final-question">
-        <span>&ldquo;Why doesn't Homer talk?&rdquo;</span>
-        <strong>&ldquo;I guess we're building an arcade emulator.&rdquo;</strong>
-      </div>
-
-      <p>
-        In retrospect, there were probably easier solutions. They would have
-        been considerably less interesting.
-      </p>
-    </section>
     <section class="about-legal">
       <h2>Project and licensing</h2>
       <p>

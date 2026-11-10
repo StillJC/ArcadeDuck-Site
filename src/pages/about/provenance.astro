@@ -1,0 +1,241 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+---
+
+<SiteLayout title="Source provenance | ArcadeDuck" description="ArcadeDuck's recorded source lineage, file-level exceptions, and pre-release provenance audit.">
+  <section class="page-hero about-hero">
+    <p class="eyebrow">Source History</p>
+    <h1>Source provenance</h1>
+    <p class="page-description">The recorded lineage and cleanup behind the initial public source release.</p>
+    <p><a href={`${base}about/`}>Back to the ArcadeDuck story &rarr;</a></p>
+  </section>
+  <article class="about-page">
+    <section class="about-section">
+      <p class="eyebrow">Audited source provenance</p>
+      <h2>Where the current ArcadeDuck source actually comes from.</h2>
+
+      <p>
+        ArcadeDuck is built on DuckStation source. The current lineage is not
+        inferred from dates, similar files, or old project descriptions. It was
+        reconstructed directly from the repository's Git graph during an
+        extensive provenance audit.
+      </p>
+
+      <div class="lineage" aria-label="ArcadeDuck active source lineage">
+        <a
+          class="lineage-step"
+          href="https://github.com/stenzek/duckstation/commit/2149ab4d6955bfa60cd56856aeb05aebef9e4a1a"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="lineage-label">Inherited root</span>
+          <strong>DuckStation</strong>
+          <span><code>2149ab4d6955bfa60cd56856aeb05aebef9e4a1a</code></span>
+        </a>
+
+        <span class="lineage-arrow" aria-hidden="true">&darr;</span>
+
+        <a
+          class="lineage-step"
+          href="https://github.com/stenzek/duckstation/commit/25bc8a64803df7e702db66e0f11d7b7d0fdc99f2"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="lineage-label">Last inherited DuckStation commit</span>
+          <strong>GPL-era Git boundary</strong>
+          <span><code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code></span>
+        </a>
+
+        <span class="lineage-arrow" aria-hidden="true">&darr;</span>
+
+        <div class="lineage-step lineage-current">
+          <span class="lineage-label">First ArcadeDuck commit</span>
+          <strong>ArcadeDuck active lineage</strong>
+          <span><code>53f4ae558af0d569143d7ef7698f1328b71cdec7</code></span>
+        </div>
+      </div>
+
+      <p>
+        The first ArcadeDuck commit,
+        <code>53f4ae558af0d569143d7ef7698f1328b71cdec7</code>,
+        has exactly one parent:
+        <code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code>.
+        That establishes the active project's inherited DuckStation boundary
+        directly from repository history.
+      </p>
+
+      <p>
+        The following historical DuckStation commit,
+        <code>9ca6b5430fb358b39f21ce0b2fc0268de954dd23</code>,
+        changed the project's source licensing. The audit therefore treats
+        <code>25bc8a6</code> as the Git-graph boundary &mdash; not as a blanket
+        claim that every individual file at that revision carried the same
+        license.
+      </p>
+
+      <div class="about-links">
+        <a
+          href="https://github.com/stenzek/duckstation/commit/25bc8a64803df7e702db66e0f11d7b7d0fdc99f2"
+          target="_blank"
+          rel="noreferrer"
+        >Inherited DuckStation boundary &#8599;</a>
+
+        <a
+          href="https://github.com/stenzek/duckstation/commit/9ca6b5430fb358b39f21ce0b2fc0268de954dd23"
+          target="_blank"
+          rel="noreferrer"
+        >Following licensing-change commit &#8599;</a>
+      </div>
+    </section>
+    <section class="about-section">
+      <p class="eyebrow">The five-file exception</p>
+      <h2>The boundary had five file-level exceptions.</h2>
+
+      <p>
+        The repository-level license at the inherited boundary was GPLv3, but
+        the audit identified <strong>five source files</strong> that already
+        carried <code>PolyForm-Strict-1.0.0</code>-only SPDX headers before the
+        broader project licensing change.
+      </p>
+
+      <div class="about-code-card">
+        <span>PolyForm-only audio rewrite</span>
+        <code>00634f68cc0fc187068c9df08a4ea3564938c60a</code>
+        <strong>
+          src/util/audio_stream.cpp<br />
+          src/util/audio_stream.h
+        </strong>
+      </div>
+
+      <div class="about-code-card">
+        <span>PolyForm-only software rasterizer split</span>
+        <code>25bc8a64803df7e702db66e0f11d7b7d0fdc99f2</code>
+        <strong>
+          src/core/gpu_sw_rasterizer.cpp<br />
+          src/core/gpu_sw_rasterizer.h<br />
+          src/core/gpu_sw_rasterizer.inl
+        </strong>
+      </div>
+
+      <p>
+        That is why ArcadeDuck does not describe <code>25bc8a6</code> as simply
+        "the last GPL version." It is the correct Git boundary, but those five
+        file-level exceptions required separate treatment.
+      </p>
+
+      <p class="about-punchline">
+        Apparently even the clean boundary had a boundary condition.
+      </p>
+    </section>
+    <section class="about-section">
+      <p class="eyebrow">Historical cleanup</p>
+      <h2>The five exceptions were removed or restored before the first public release.</h2>
+
+      <div class="about-code-card">
+        <span>Restoration / removal commit</span>
+        <code>3f119ddfc13d51ad68d5134ef09fde54ae23315b</code>
+        <strong>August 27, 2026</strong>
+      </div>
+
+      <p>
+        That commit removed the separate PolyForm-era software rasterizer and
+        restored the older software-rendering path. The two audio files were
+        substantially restored to the earlier implementation that carried a GPL
+        licensing alternative, then continued forward with ArcadeDuck's own
+        audio changes.
+      </p>
+
+      <p>
+        The provenance audit compared the restored source against both the older
+        implementation and the intervening PolyForm rewrite. Its normalized
+        comparison found{' '}
+        <strong>zero retained lines
+        unique to the PolyForm rewrite</strong> in the compared current
+        audio/backend implementations, while hundreds of meaningful lines
+        matched the older implementation.
+      </p>
+
+      <p>
+        The audited source contained no
+        <code>PolyForm-Strict-1.0.0</code>-only or
+        <code>CC-BY-NC-ND-4.0</code>-only SPDX declarations in the scanned
+        current text headers.
+      </p>
+    </section>
+    <section class="about-section">
+      <p class="eyebrow">Earlier proof of concept</p>
+      <h2>Arcade1Up and t-dollaz are part of the history, not the current Git ancestry.</h2>
+
+      <p>
+        ArcadeDuck's earliest proof-of-concept work used the{' '}
+        <strong>Arcade1Up Simpsons Bowling DuckStation fork</strong> and the
+        later <strong>t-dollaz desktop continuation</strong>. Those projects
+        were important references for understanding the cabinet-specific
+        hardware and getting the original Simpsons Bowling experiment moving.
+      </p>
+
+      <p>
+        The provenance audit confirmed that the older proof-of-concept is a{' '}
+        <strong>separate snapshot history</strong>. It is not an ancestor of
+        the current ArcadeDuck <code>dev</code> lineage.
+      </p>
+
+      <p>
+        They remain credited because they are genuinely part of ArcadeDuck's
+        history. They are simply no longer presented as the Git ancestry of the
+        source tree being released today.
+      </p>
+
+      <div class="about-links">
+        <a
+          href="https://github.com/Arcade1Up/duckstation-sb"
+          target="_blank"
+          rel="noreferrer"
+        >Arcade1Up / duckstation-sb &#8599;</a>
+
+        <a
+          href="https://github.com/t-dollaz/simpsons-bowling-baby-phoenix-duckstation"
+          target="_blank"
+          rel="noreferrer"
+        >t-dollaz continuation &#8599;</a>
+      </div>
+    </section>
+    <section class="about-section">
+      <p class="eyebrow">Repository-wide review</p>
+      <h2>Provenance was checked, not assumed.</h2>
+
+      <p>
+        The provenance review enumerated all{' '}
+        <strong>2,145 tracked files</strong> in the audited checkout and
+        scanned tracked text for SPDX identifiers, copyright notices, license
+        text, and upstream/reference markers.
+      </p>
+
+      <p>
+        Reachable history, branch tips, historical license changes, candidate
+        upstream matches, third-party notices, source attribution, and the
+        identified file-level licensing exceptions were then reviewed in
+        detail.
+      </p>
+
+      <p>
+        Even minor or possible findings were remediated before the public
+        repository was created. The public repository was then started from the
+        verified clean source snapshot instead of publishing the old forensic
+        development history.
+      </p>
+
+      <div class="about-code-card">
+        <span>Initial clean public source commit</span>
+        <code>13a1d6a02428efe4ec00e531ccd8e29c1fd0bc0e</code>
+        <strong>Initial public source release</strong>
+      </div>
+
+      <p class="about-punchline">
+        Trust is useful. Reproducible commit hashes are considerably more useful.
+      </p>
+    </section>
+  </article>
+</SiteLayout>

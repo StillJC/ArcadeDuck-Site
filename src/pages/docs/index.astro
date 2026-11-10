@@ -12,8 +12,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
     <p class="eyebrow">Help</p>
     <h1>Documentation</h1>
     <p class="page-description">
-      Installation, building from source, game setup, controls, configuration,
-      and troubleshooting.
+      Start with setup and BIOS requirements, or choose a guide below.
     </p>
   </section>
 
@@ -58,12 +57,17 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
       </div>
 
       <p>
-        Launch ArcadeDuck from frontends and scripts, and configure native MAME
-        cheat packages for supported arcade sets.
+        Set up your games, launch them from a frontend, or configure native MAME cheats.
       </p>
     </div>
 
     <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Getting Started</span>
+        <h3>Setup and BIOS</h3>
+        <p>Install ArcadeDuck, prepare BIOS and game files, and configure controls in each game's settings.</p>
+        <p><a href={`${base}docs/setup/`}>Open setup and BIOS guide &rarr;</a></p>
+      </article>
       <article class="planned-system-card">
         <span class="hardware-manufacturer">Frontends &amp; Cabinets</span>
         <h3>Command-line launching</h3>

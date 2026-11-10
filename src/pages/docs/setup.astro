@@ -1,0 +1,96 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+
+const requiredBios = [
+  { system: 'Konami GV', archive: 'konamigv.zip' },
+  { system: 'Konami GQ', archive: 'No separate BIOS ZIP required' },
+  { system: 'Namco System 11', archive: 'namcoc76.zip' },
+  { system: 'Namco System 12', archive: 'No separate BIOS ZIP required' },
+  { system: 'Namco System 12 — Cyber Lead LED hardware', archive: 'namco_cyberlead_led.zip' },
+  { system: 'Capcom ZN-1', archive: 'coh1000c.zip' },
+  { system: 'Capcom ZN-2', archive: 'coh3002c.zip' },
+  { system: 'Taito G-Net', archive: 'coh3002t.zip or coh1002t.zip (game-dependent)' },
+  { system: 'Taito FX-1', archive: 'coh1000t.zip' },
+  { system: 'Acclaim ZN-1', archive: 'coh1000a.zip' },
+  { system: 'Time Warner ZN-1', archive: 'coh1000w.zip' },
+  { system: 'Atlus ZN-1', archive: 'coh1001l.zip' },
+  { system: 'Video System ZN-1', archive: 'coh1002v.zip' },
+  { system: 'Eighting / Raizing ZN-1', archive: 'coh1002e.zip' },
+  { system: 'Tecmo TPS System', archive: 'coh1002m.zip' },
+];
+---
+
+<SiteLayout title="Setup and BIOS | ArcadeDuck" description="Set up ArcadeDuck on Windows, add BIOS and game files, and configure controls for each game.">
+  <section class="page-hero">
+    <p class="eyebrow">Getting Started</p>
+    <h1>Setup and BIOS</h1>
+    <p class="page-description">Prepare your files, add your games, and assign your controls.</p>
+  </section>
+  <section class="systems-status-section">
+    <div class="planned-system-grid">
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 1</span>
+        <h2>Download and extract</h2>
+        <p>Get the Windows x64 package from the <a href="https://github.com/StillJC/ArcadeDuck/releases">official releases</a> and extract it to the location you want to use.</p>
+      </article>
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 2</span>
+        <h2>Add BIOS files</h2>
+        <p>Place the archives listed <a href="#bios">below</a> in ArcadeDuck's configured BIOS folder for the hardware you want to run.</p>
+      </article>
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 3</span>
+        <h2>Add your games</h2>
+        <p>Add your ROM directory to the game library. Keep the required parent archives and CHD media with your game collection.</p>
+      </article>
+      <article class="planned-system-card">
+        <span class="hardware-manufacturer">Step 4</span>
+        <h2>Configure each game</h2>
+        <p>Open the game's settings and assign its buttons, lightguns, trackballs, or other devices. Controls and configuration are saved per game.</p>
+      </article>
+    </div>
+    <p>For the video walkthrough, visit the <a href={`${base}docs/`}>documentation page</a>.</p>
+  </section>
+  <section class="bios-requirements" id="bios">
+    <p class="eyebrow">Required Files</p>
+    <h2>Current BIOS files</h2>
+    <p>
+      Keep BIOS archives in their original ZIP format and file names.
+    </p>
+    <p>
+      System 12 boot code and H8 sound/I/O firmware are supplied by each game's
+      ROM set. No separate System 12 BIOS archive is required.
+    </p>
+    <p>
+      For System 12 games using Cyber Lead cabinets, place
+      <code>namco_cyberlead_led.zip</code> in the BIOS folder when enabling LED
+      hardware emulation. LED hardware emulation is disabled by default;
+      cabinet JVS controls remain available without it.
+    </p>
+
+    <div class="game-table-wrapper">
+      <table class="game-table">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Required BIOS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {requiredBios.map((bios) => (
+            <tr>
+              <td><strong>{bios.system}</strong></td>
+              <td><code>{bios.archive}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="systems-note">
+    <div><p class="eyebrow">ROM Sets</p><h2>Non-merged, split, and merged layouts</h2></div>
+    <p>All three MAME-style layouts are supported. The <a href={`${base}docs/command-line/#rom-layouts`}>ROM layout reference</a> explains parent archives and selecting clones from merged collections.</p>
+  </section>
+</SiteLayout>

@@ -1,5 +1,8 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import SystemScreenshot from '../../components/SystemScreenshot.astro';
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
 <SiteLayout
@@ -7,7 +10,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
   description="Arcade hardware supported and under development for ArcadeDuck."
 >
   <section class="page-hero systems-hero">
-    <p class="eyebrow">Hardware Roadmap</p>
+    <p class="eyebrow">Hardware Support</p>
 
     <h1>Arcade systems</h1>
 
@@ -39,6 +42,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="simpbowl" title="The Simpsons Bowling" />
+
         <p>
           PlayStation-derived arcade platform using CD-ROM media with
           board-specific controls and daughterboard hardware.
@@ -62,6 +67,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="cryptklr" title="Crypt Killer" />
+
         <p>
           PlayStation-derived Konami hardware using SCSI hard-disk storage,
           expanded system memory, and dedicated Konami sound hardware.
@@ -83,6 +90,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           </div>
           <span class="status-badge supported">Supported</span>
         </div>
+
+        <SystemScreenshot shortname="tekken2" title="Tekken 2" />
 
         <p>
           Namco's first major PlayStation-derived arcade platform with
@@ -107,6 +116,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="tektagt" title="Tekken Tag Tournament" />
+
         <p>
           Successor to System 11 with expanded PlayStation-derived hardware,
           JVS cabinet controls, and optional Cyber Lead LED hardware emulation.
@@ -129,6 +140,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="sfex" title="Street Fighter EX" />
+
         <p>Capcom's Sony ZN-1 hardware based on the COH-1000C board.</p>
 
         <div class="hardware-tags">
@@ -147,6 +160,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="rvschool" title="Rival Schools: United By Fate" />
+
         <p>Capcom's second-generation Sony ZN hardware based on the COH-3002C board.</p>
 
         <div class="hardware-tags">
@@ -164,6 +179,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           </div>
           <span class="status-badge supported">Supported</span>
         </div>
+
+        <SystemScreenshot shortname="raycris" title="RayCrisis" />
 
         <p>
           Taito's removable-media PlayStation-derived platform, including
@@ -188,6 +205,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="gdarius2" title="G-Darius Ver.2" />
+
         <p>Taito's ZN-1-derived FX-1 hardware based on COH-1000T / COH-1002T.</p>
 
         <div class="hardware-tags">
@@ -206,6 +225,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="nbajamex" title="NBA Jam Extreme" />
+
         <p>Acclaim's Sony ZN-1 implementation based on the COH-1000A board.</p>
 
         <div class="hardware-tags">
@@ -222,6 +243,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           </div>
           <span class="status-badge supported">Supported</span>
         </div>
+
+        <SystemScreenshot shortname="primrag2" title="Primal Rage II" />
 
         <p>
           Atari / Time Warner's Sony ZN-1 implementation based on the COH-1000W board.
@@ -242,6 +265,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="hvnsgate" title="Heaven's Gate" />
+
         <p>Atlus's Sony ZN-1 implementation based on the COH-1001L board.</p>
 
         <div class="hardware-tags">
@@ -259,6 +284,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           <span class="status-badge supported">Supported</span>
         </div>
 
+        <SystemScreenshot shortname="aerofgts" title="Aero Fighters Special" />
+
         <p>Video System's Sony ZN-1 implementation based on the COH-1002V board.</p>
 
         <div class="hardware-tags">
@@ -275,6 +302,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           </div>
           <span class="status-badge supported">Supported</span>
         </div>
+
+        <SystemScreenshot shortname="bldyror2" title="Bloody Roar 2" />
 
         <p>
           Eighting / Raizing's Sony ZN-1 implementation based on the COH-1002E board.
@@ -294,6 +323,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
           </div>
           <span class="status-badge supported">Supported</span>
         </div>
+
+        <SystemScreenshot shortname="doapp" title="Dead Or Alive ++" />
 
         <p>Tecmo's PlayStation-derived TPS hardware based on the COH-1002M board.</p>
 
@@ -353,14 +384,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
 
   <section class="systems-note">
-    <div>
-      <p class="eyebrow">Roadmap Policy</p>
-      <h2>Hardware support is milestone-driven.</h2>
-    </div>
-
-    <p>
-      Systems listed as In Development are active ArcadeDuck implementation targets.
-      Development status indicates current project work, not a promised release date.
-    </p>
+    <div><p class="eyebrow">Next Steps</p><h2>Games, setup, and development</h2></div>
+    <p><a href={`${base}games/`}>Browse games</a>, <a href={`${base}docs/setup/`}>check BIOS requirements</a>, or <a href={`${base}development/`}>follow the development roadmap</a>.</p>
   </section>
 </SiteLayout>
